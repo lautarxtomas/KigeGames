@@ -141,18 +141,29 @@ footer svg:hover{
 
 .buttonClass{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     margin: 16px;
+    gap: 20px;
+}
+
+.finalizarCompra {
+    background-color: violet;
+    padding: 15px;
 }
 
 .verProductos{
     background-color: violet;
     padding: 15px;
-    
 }
 
+
 .verProductos:focus{
+    background-image: linear-gradient(to bottom, violet, rgb(16, 5, 68));
+    color: whitesmoke;
+}
+
+.finalizarCompra:focus{
     background-image: linear-gradient(to bottom, violet, rgb(16, 5, 68));
     color: whitesmoke;
 }
