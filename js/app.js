@@ -46,7 +46,30 @@ videojuegos.forEach((juego) => {
     gameCards.append(card)
 })
 
-const carrito = []
+let carrito = []
+
+
+const cartContainer = document.querySelector('#cartContainer')
+
+// Funcion para imprimir el carrito cada vez que se actualiza el array
+const imprimirCarrito = () => {
+    cartContainer.innerHTML = ''
+    carrito.forEach((juego) => {
+        const cartRow = document.createElement('div')
+        cartRow.className = 'cartRow'
+        cartRow.innerHTML = `
+        <div class="cartImg">
+        <img src="${juego.imgSrc}">
+        </div>
+        <div class="cartTitle"><b> ${juego.nombre}</b></div>
+        <div class="cartDesc"><b> ${juego.consola}</b></div>
+        <div class="cartPrice"><b> $${juego.precio}</b></div>
+        `
+        cartContainer.append(cartRow)
+    })
+}
+
+// FUNCION PARA APLICAR DESCUENTO Y FUNCION PARA CALCULAR TOTAL CARRITO
 
 function descuento(total, descuento) {
     let res = total - descuento
@@ -64,6 +87,7 @@ const totalCarrito = () => {
         alert('Su precio a pagar es de $' + montoTotal)
     }
     alert('MUCHAS GRACIAS POR SU COMPRA!')
+    vaciarCarrito()
 }
     
 
@@ -75,6 +99,8 @@ const addGame = (e) => {
     const videojuego = videojuegos.find((juego) => juego.id ==  juegoElegido)
     carrito.push(videojuego)
     console.log(carrito)
+    imprimirCarrito()
+    localStorage.setItem('carrito', JSON.stringify(carrito)) 
 }
 
 // BOTONES PARA AGREGAR JUEGOS AL CARRITO
@@ -82,6 +108,25 @@ const botonesCompra = document.querySelectorAll('.buttonCTA')
 botonesCompra.forEach((botonCompra) => {
     botonCompra.addEventListener('click', addGame)
 })
+
+// Al cargar la pagina, verifico que exista algo guardado en el carrito (gracias al local storage) y lo imprimo
+if (localStorage.getItem('carrito')) {
+    carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion imprimirCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
+    imprimirCarrito()
+}
+
+// BOTON PARA VACIAR EL CARRITO
+
+const vaciarCarrito = () => {
+    if (localStorage.getItem('carrito')) {
+        localStorage.removeItem('carrito') // Al borrar los productos del local storage, no aparecerían de nuevo en pantalla cuando recarguemos la página
+    }
+    carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
+    imprimirCarrito()
+}
+
+const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
+vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
 
 
 // BOTON PARA FINALIZAR COMPRA
@@ -93,7 +138,7 @@ finalizarCompra.forEach((botonFinalizar) => {
 // ------------------------------------------------
 
 
-// FILTER
+// FILTER CON PROMPT
 
 const agregarJuego = () => {
  let busqueda = prompt('Que videojuego estás buscando?:').toLowerCase();
@@ -124,7 +169,7 @@ const agregarJuego = () => {
 
          } else {
               alert('Puede seguir agregando juegos al carrito o apretar el botón de finalizar compra para ver su monto total')
-              console.log(carrito)
+              imprimirCarrito()
         }
       } else {
           agregarJuego()
