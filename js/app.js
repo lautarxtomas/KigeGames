@@ -1,6 +1,6 @@
 // JUEGOS DEL INDEX
 
-const gameCards = document.getElementById('gameCards')
+const gameCards = document.querySelector('#gameCards')
 
 videojuegos.forEach((juego) => {
     const card = document.createElement('div')
@@ -17,7 +17,7 @@ videojuegos.forEach((juego) => {
 
 // JUEGOS DE LA SECCION PRODUCTOS ---> CUANDO DESCOMENTO ESTO, NO SOLO QUE NO SE RENDERIZAN LAS CARDS DEL ARRAY videojuegosProductos en el containerProductos (que esta en productos.html), sino que hace que no me anden los botones de añadir al carrito.
 
-// const containerProductos = document.getElementById('containerProductos')
+// const containerProductos = document.querySelector('#containerProductos')
 
 // videojuegosProductos.forEach((juego) => {
 //     const card = document.createElement('div')
@@ -128,44 +128,85 @@ finalizarCompra.forEach((botonFinalizar) => {
 // ------------------------------------------------
 
 
+// ------------ SEARCH ------------
+
+
+let busquedaJuego = []
+
+const juegoBuscado = document.querySelector('.juegoBuscado')
+const formSearch = document.querySelector('#searchForm')
+const formInput = document.querySelector('#searchInput')
+
+const realizarBusqueda = (e) => {
+    e.preventDefault()
+    let busquedaUsuario = formInput.value
+    let resultadoBusqueda = videojuegos.filter(
+        (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario.toLowerCase())
+    );
+    busquedaJuego.push(resultadoBusqueda)
+    console.log(resultadoBusqueda)
+    renderizarBusqueda()
+}
+
+formSearch.addEventListener('submit', realizarBusqueda)
+
+ const renderizarBusqueda = () => {
+     juegoBuscado.innerHTML = ''
+     busquedaJuego.forEach((juego) => {
+         const card = document.createElement('div')
+         card.className = 'card'
+         card.innerHTML = `
+             <h3 class="cardTitle"> ${juego.nombre} </h3>
+             <img src="${juego.imgSrc}" class="cardImg">
+             <p class="cardDesc"> ${juego.consola} </p>
+             <span class="cardPrice"> $${juego.precio} </span>
+             <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
+         `
+     juegoBuscado.append(card)
+     })
+ }
+
+//  FIN SEARCH
+
+
 // FILTER CON PROMPT
 
-const agregarJuego = () => {
- let busqueda = prompt('Que videojuego estás buscando?:').toLowerCase();
- const resultadoBusqueda = videojuegos.filter(
-     (videojuego) => videojuego.nombre.toLowerCase().includes(busqueda.toLowerCase())
-     );
+// const agregarJuego = () => {
+//  let busqueda = prompt('Que videojuego estás buscando?:').toLowerCase();
+//  const resultadoBusqueda = videojuegos.filter(
+//      (videojuego) => videojuego.nombre.toLowerCase().includes(busqueda.toLowerCase())
+//      );
 
- //  Se crea un nuevo array con el juego buscado en caso de incluir el string ingresado en su nombre original. En este array temporal solo va a poder existir un juego por vuelta, por lo tanto, cuando lo agreguemos al carrito, va a ser usando de parametro resultadoBusqueda[0].
+//  //  Se crea un nuevo array con el juego buscado en caso de incluir el string ingresado en su nombre original. En este array temporal solo va a poder existir un juego por vuelta, por lo tanto, cuando lo agreguemos al carrito, va a ser usando de parametro resultadoBusqueda[0].
      
-// Este if indica que si en el array creado con el filter hay por lo menos un juego, agregue el mismo al carrito
-       if (resultadoBusqueda.length === 1){
-        agregarAlCarrito(resultadoBusqueda[0]);
-       } else {
-           alert ('No tenemos ese videojuego o no lo buscó correctamente. Ingrese otro:')
-           agregarJuego()
-       }
-   }
+// // Este if indica que si en el array creado con el filter hay por lo menos un juego, agregue el mismo al carrito
+//        if (resultadoBusqueda.length === 1){
+//         agregarAlCarrito(resultadoBusqueda[0]);
+//        } else {
+//            alert ('No tenemos ese videojuego o no lo buscó correctamente. Ingrese otro:')
+//            agregarJuego()
+//        }
+//    }
 
-      const agregarAlCarrito = (videojuego) => {
-          alert(`Nombre: ${videojuego.nombre} \nPrecio: ${videojuego.precio}`);
+//       const agregarAlCarrito = (videojuego) => {
+//           alert(`Nombre: ${videojuego.nombre} \nPrecio: ${videojuego.precio}`);
 
-       if (confirm(`¿Desea agregar ${videojuego.nombre} al carrito?`)) {
+//        if (confirm(`¿Desea agregar ${videojuego.nombre} al carrito?`)) {
 
-         carrito.push(videojuego);
-         if (confirm("Desea agregar otro juego?")) {
+//          carrito.push(videojuego);
+//          if (confirm("Desea agregar otro juego?")) {
 
-           agregarJuego()
+//            agregarJuego()
 
-         } else {
-              alert('Puede seguir agregando juegos al carrito o apretar el botón de finalizar compra para ver su monto total')
-              imprimirCarrito()
-        }
-      } else {
-          agregarJuego()
-      }     
+//          } else {
+//               alert('Puede seguir agregando juegos al carrito o apretar el botón de finalizar compra para ver su monto total')
+//               imprimirCarrito()
+//         }
+//       } else {
+//           agregarJuego()
+//       }     
 
-   }
+//    }
 
 
-   agregarJuego()
+//    agregarJuego()
