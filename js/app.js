@@ -1,47 +1,64 @@
+// SELECCION DE ELEMENTOS
+const gameCards = document.querySelector('#gameCards')
+const cartContainer = document.querySelector('#cartContainer')
+const totalItemsInCart = document.querySelector(".totalItemsCarrito");
+const subtotal = document.querySelector(".subtotal")
+
+
+
 // JUEGOS DEL INDEX
 
-const gameCards = document.querySelector('#gameCards')
+renderizarListaJuegos = (array) => {
+    gameCards.innerHTML = ''
+    array.forEach((juego) => {
+        const card = document.createElement('div')
+        card.className = 'card'
+        card.innerHTML = `
+                <h3 class="cardTitle"> ${juego.nombre} </h3>
+                <img src="${juego.imgSrc}" class="cardImg">
+                <p class="cardDesc"> ${juego.consola} </p>
+                <span class="cardPrice"> $${juego.precio} </span>
+                <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
+            `
+        gameCards.append(card)
+    })
+    listenerBotonCarrito()
+}
 
-videojuegos.forEach((juego) => {
-    const card = document.createElement('div')
-    card.className = 'card'
-    card.innerHTML = `
-            <h3 class="cardTitle"> ${juego.nombre} </h3>
-            <img src="${juego.imgSrc}" class="cardImg">
-            <p class="cardDesc"> ${juego.consola} </p>
-            <span class="cardPrice"> $${juego.precio} </span>
-            <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
-        `
-    gameCards.append(card)
-})
+//   const containerProductos = document.querySelector('#containerProductos')
 
-// JUEGOS DE LA SECCION PRODUCTOS ---> CUANDO DESCOMENTO ESTO, NO SOLO QUE NO SE RENDERIZAN LAS CARDS DEL ARRAY videojuegosProductos en el containerProductos (que esta en productos.html), sino que hace que no me anden los botones de añadir al carrito.
-
-// const containerProductos = document.querySelector('#containerProductos')
-
-// videojuegosProductos.forEach((juego) => {
-//     const card = document.createElement('div')
-//     card.classname = 'card'
-//     card.innerHTML = `
-//             <h3 class="cardTitle"> ${juego.nombre} </h3>
-//             <img src="${juego.imgSrc}" class="cardImg">
-//             <p class="cardDesc"> ${juego.consola} </p>
-//             <span class="cardPrice"> $${juego.precio} </span>
-//             <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
-//         `
-//     containerProductos.append(card)
-
-// })
-
+//   renderizarListaProductos = (array) => {
+//     array.forEach((juego) => {
+//         const card = document.createElement('div')
+//         card.classname = 'card'
+//         card.innerHTML = `
+//                 <h3 class="cardTitle"> ${juego.nombre} </h3>
+//                 <img src="${juego.imgSrc}" class="cardImg">
+//                 <p class="cardDesc"> ${juego.consola} </p>
+//                 <span class="cardPrice"> $${juego.precio} </span>
+//                 <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
+//             `
+//         containerProductos.append(card)
+//     })
+//     listenerBotonCarrito()
+//   }
 
 
 let carrito = []
 
 
-const cartContainer = document.querySelector('#cartContainer')
+// ELIMINAR JUEGO DEL CARRITO
 
-// Funcion para imprimir el carrito cada vez que se actualiza el array
-const imprimirCarrito = () => {
+const eliminarJuegoDelCarrito = (e) => {
+    const juegoIdSelected = e.target.closest('.borrarJuego').getAttribute('data-id')
+    carrito = carrito.filter((juego) => juego.id != juegoIdSelected)
+    renderizarCarrito()
+}
+
+
+
+// Funcion para renderizar el carrito cada vez que se actualiza el array
+const renderizarCarrito = () => {
     cartContainer.innerHTML = ''
     carrito.forEach((juego) => {
         const cartRow = document.createElement('div')
@@ -53,12 +70,18 @@ const imprimirCarrito = () => {
         <div class="cartTitle"><b> ${juego.nombre}</b></div>
         <div class="cartDesc"><b> ${juego.consola}</b></div>
         <div class="cartPrice"><b> $${juego.precio}</b></div>
+        
+        <div class="borrarJuego" data-id="${juego.id}">  <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" alt="">  </div>
         `
         cartContainer.append(cartRow)
     })
+    document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
+        botonDeBorrar.addEventListener('click', eliminarJuegoDelCarrito)
+    })
+    
 }
 
-// FUNCION PARA APLICAR DESCUENTO Y FUNCION PARA CALCULAR TOTAL CARRITO
+// FUNCION PARA CALCULAR TOTAL CARRITO Y APLICAR DESCUENTO
 
 function descuento(total, descuento) {
     let res = total - descuento
@@ -79,28 +102,30 @@ const totalCarrito = () => {
     vaciarCarrito()
 }
     
+// --------------------------------------
 
-// EVENTOS
+// BOTONES PARA AGREGAR JUEGOS AL CARRITO
 
-const addGame = (e) => {
+const agregarJuegoAlCarrito = (e) => {
    
     const juegoElegido = e.target.getAttribute('data-id')
     const videojuego = videojuegos.find((juego) => juego.id ==  juegoElegido)
     carrito.push(videojuego)
-    imprimirCarrito()
+    renderizarCarrito()
     localStorage.setItem('carrito', JSON.stringify(carrito)) 
 }
 
-// BOTONES PARA AGREGAR JUEGOS AL CARRITO
-const botonesCompra = document.querySelectorAll('.buttonCTA')
-botonesCompra.forEach((botonCompra) => {
-    botonCompra.addEventListener('click', addGame)
-})
+const listenerBotonCarrito = () => {
+    const botonesCompra = document.querySelectorAll('.buttonCTA')
+    botonesCompra.forEach((botonCompra) => {
+        botonCompra.addEventListener('click', agregarJuegoAlCarrito)
+    })
+}
 
 // Al cargar la pagina, verifico que exista algo guardado en el carrito (gracias al local storage) y lo imprimo
 if (localStorage.getItem('carrito')) {
-    carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion imprimirCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
-    imprimirCarrito()
+    carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion renderizarCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
+    renderizarCarrito()
 }
 
 
@@ -111,102 +136,47 @@ const vaciarCarrito = () => {
         localStorage.removeItem('carrito') // Al borrar los productos del local storage, no aparecerían de nuevo en pantalla cuando recarguemos la página
     }
     carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
-    imprimirCarrito()
+    renderizarCarrito()
 }
 
 const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
 vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
 
-// --------------------------------------
+
 
 // BOTON PARA FINALIZAR COMPRA
-const finalizarCompra = document.querySelectorAll('.finalizarCompra')
-finalizarCompra.forEach((botonFinalizar) => {
-    botonFinalizar.addEventListener('click', totalCarrito)
-})
+const finalizarCompra = document.querySelector('.finalizarCompra')
+finalizarCompra.addEventListener('click', totalCarrito)
+
 
 // ------------------------------------------------
 
 
-// ------------ SEARCH ------------
+// ------------ SEARCH BAR ------------
 
 
-let busquedaJuego = []
-
-const juegoBuscado = document.querySelector('.juegoBuscado')
-const formSearch = document.querySelector('#searchForm')
+const juegoBuscado = document.querySelector('#juegoBuscado')
 const formInput = document.querySelector('#searchInput')
+const buttonSearch = document.querySelector('#searchButton')
 
-const realizarBusqueda = (e) => {
-    e.preventDefault()
-    let busquedaUsuario = formInput.value
-    let resultadoBusqueda = videojuegos.filter(
-        (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario.toLowerCase())
+const searchBar = () => {
+    const busquedaUsuario = formInput.value.toLowerCase()
+    const resultadoBusqueda = videojuegos.filter(
+        (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario)
     );
-    busquedaJuego.push(resultadoBusqueda)
     console.log(resultadoBusqueda)
-    renderizarBusqueda()
+    renderizarListaJuegos(resultadoBusqueda)
 }
 
-formSearch.addEventListener('submit', realizarBusqueda)
+buttonSearch.addEventListener('click', searchBar)
 
- const renderizarBusqueda = () => {
-     juegoBuscado.innerHTML = ''
-     busquedaJuego.forEach((juego) => {
-         const card = document.createElement('div')
-         card.className = 'card'
-         card.innerHTML = `
-             <h3 class="cardTitle"> ${juego.nombre} </h3>
-             <img src="${juego.imgSrc}" class="cardImg">
-             <p class="cardDesc"> ${juego.consola} </p>
-             <span class="cardPrice"> $${juego.precio} </span>
-             <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
-         `
-     juegoBuscado.append(card)
-     })
- }
 
 //  FIN SEARCH
 
 
-// FILTER CON PROMPT
 
-// const agregarJuego = () => {
-//  let busqueda = prompt('Que videojuego estás buscando?:').toLowerCase();
-//  const resultadoBusqueda = videojuegos.filter(
-//      (videojuego) => videojuego.nombre.toLowerCase().includes(busqueda.toLowerCase())
-//      );
+// LLAMADOS
 
-//  //  Se crea un nuevo array con el juego buscado en caso de incluir el string ingresado en su nombre original. En este array temporal solo va a poder existir un juego por vuelta, por lo tanto, cuando lo agreguemos al carrito, va a ser usando de parametro resultadoBusqueda[0].
-     
-// // Este if indica que si en el array creado con el filter hay por lo menos un juego, agregue el mismo al carrito
-//        if (resultadoBusqueda.length === 1){
-//         agregarAlCarrito(resultadoBusqueda[0]);
-//        } else {
-//            alert ('No tenemos ese videojuego o no lo buscó correctamente. Ingrese otro:')
-//            agregarJuego()
-//        }
-//    }
+renderizarListaJuegos(videojuegos)
+// renderizarListaProductos(videojuegosProductos)
 
-//       const agregarAlCarrito = (videojuego) => {
-//           alert(`Nombre: ${videojuego.nombre} \nPrecio: ${videojuego.precio}`);
-
-//        if (confirm(`¿Desea agregar ${videojuego.nombre} al carrito?`)) {
-
-//          carrito.push(videojuego);
-//          if (confirm("Desea agregar otro juego?")) {
-
-//            agregarJuego()
-
-//          } else {
-//               alert('Puede seguir agregando juegos al carrito o apretar el botón de finalizar compra para ver su monto total')
-//               imprimirCarrito()
-//         }
-//       } else {
-//           agregarJuego()
-//       }     
-
-//    }
-
-
-//    agregarJuego()

@@ -15,11 +15,11 @@ class Videojuego {
 
 // JUEGOS INDEX
 
-const juego1 = videojuegos.push(new Videojuego ('Fifa 22', 'PS4', 6000, 'deportes', 'https://i.blogs.es/0a2b76/e53cynvwuaix9pa/450_1000.jpeg', 'F22'))
-const juego2 = videojuegos.push(new Videojuego ('Persona 5', 'PS4', 4000, 'rpg', 'https://playtecgames.com/wp-content/uploads/2020/08/persona-5-royal.jpg', 'P5'))
-const juego3 = videojuegos.push(new Videojuego ('God of War', 'PS4', 5000, 'accion', 'https://m.media-amazon.com/images/I/711lrrvzt+L._SL1496_.jpg', 'GOW4'))
-const juego4 = videojuegos.push(new Videojuego ('Alien', 'PS4', 2000, 'terror', 'https://juegosdigitalesargentina.com/files/images/productos/1495070916-alien-isolation-the-collection-ps4.jpg', 'AIS'))
-const juego5 = videojuegos.push(new Videojuego ('PES 2021', 'PS4', 3000, 'deportes', 'https://www.portalgames.com.ar/wp-content/uploads/2020/09/pes-2021.jpg', 'PES2021'))
+const juego1 = videojuegos.push(new Videojuego ('Fifa 22', 'PS4', 6000, 'deportes', 'https://i.blogs.es/0a2b76/e53cynvwuaix9pa/450_1000.jpeg', 001))
+const juego2 = videojuegos.push(new Videojuego ('Persona 5', 'PS4', 4000, 'rpg', 'https://playtecgames.com/wp-content/uploads/2020/08/persona-5-royal.jpg', 002))
+const juego3 = videojuegos.push(new Videojuego ('God of War', 'PS4', 5000, 'accion', 'https://m.media-amazon.com/images/I/711lrrvzt+L._SL1496_.jpg', 003))
+const juego4 = videojuegos.push(new Videojuego ('Alien', 'PS4', 2000, 'terror', 'https://juegosdigitalesargentina.com/files/images/productos/1495070916-alien-isolation-the-collection-ps4.jpg', 004))
+const juego5 = videojuegos.push(new Videojuego ('PES 2021', 'PS4', 3000, 'deportes', 'https://www.portalgames.com.ar/wp-content/uploads/2020/09/pes-2021.jpg', 005))
 
 
 

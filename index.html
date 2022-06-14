@@ -63,10 +63,10 @@
 
                 <div class="d-flex">
 
-                  <form id="searchForm" class="d-flex">
+                  <div id="searchBar" class="d-flex">
                     <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button id="searchButton" class="btn btn-outline-success bg-black" type="submit">Search</button>
-                  </form>
+                    <button id="searchButton" class="btn btn-outline-success bg-black">Search</button>
+                  </div>
 
                 </div>
 
@@ -114,7 +114,7 @@
           <h1>NUEVOS LANZAMIENTOS</h1>
         </div>
 
-        <div class="juegoBuscado">
+        <div id="juegoBuscado">
           <!-- Codigo inyectado desde JS -->
         </div>
       
@@ -124,13 +124,20 @@
         </section>
 
         <div class="cartHeader">
+          <img src="https://cdn-icons-png.flaticon.com/512/3301/3301039.png" alt="">
           <span> Carrito </span>
+          <div class="totalItemsCarrito">0</div>
         </div>
 
-        <div id="cartContainer" class="cartContainer">
+        <div id="cartContainer">
               <!-- Codigo inyectado desde JS -->
+
+
+
         </div>
 
+        <div class="subtotal"></div>
+        
 
         <div class="buttonClass">
           <button id="vaciarCarrito" class="vaciar"> 
@@ -189,6 +196,8 @@ integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+
 
 <script src="js/data.js" ></script>
 <script src="js/app.js" ></script>
+
+<script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 
 </body>
 </html>

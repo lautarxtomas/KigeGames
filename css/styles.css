@@ -1,6 +1,6 @@
 body {
   font-family: 'Oxanium';
-  background-image: linear-gradient(to left, #ac2ba5, #8e8dc0); }
+  background-color: #e9dcdc; }
 
 .navbar {
   background-color: violet !important; }
@@ -8,7 +8,7 @@ body {
     color: #5f0d44 !important;
     font-size: 30px; }
     .navbar .navbar-brand img {
-      width: 150px; }
+      width: 100px; }
   .navbar .cuentas {
     list-style: none; }
     .navbar .cuentas a {
@@ -19,7 +19,7 @@ body {
     margin-left: 16px; }
 
 main {
-  margin-top: 5cm;
+  margin-top: 3.5cm;
   width: 100%; }
   main section {
     margin-top: 1cm; }
@@ -44,16 +44,13 @@ footer {
 
 /* --------------- INDEX DESKTOP --------------- */
 /* PRODUCTOS INDEX */
-.carousel-item {
-  max-height: 550px; }
-  .carousel-item img {
-    object-fit: cover;
-    height: 500px;
-    width: 100%;
-    max-height: 550px;
-    position: center; }
+.carousel-inner .carousel-item img {
+  object-fit: cover;
+  max-height: 550px;
+  position: center; }
 
-.carousel-gow img {
+.carousel-inner .carousel-gow
+img {
   object-fit: cover;
   object-position: top; }
 
@@ -76,6 +73,8 @@ footer {
     border: 1px solid whitesmoke;
     border-radius: 20px;
     margin: 25px; }
+    #gameCards .card:hover {
+      background-image: linear-gradient(to left, #fffffb, #d8caca); }
     #gameCards .card .cardImg {
       width: 80%; }
     #gameCards .card .cardPrice {
@@ -100,18 +99,27 @@ footer {
 .cartHeader {
   display: flex;
   justify-content: center;
+  align-items: center;
   margin-top: 50px;
   margin-bottom: 25px;
   font-size: 30px; }
+  .cartHeader img {
+    width: 50px;
+    margin-right: 30px; }
+  .cartHeader .totalItemsCarrito {
+    background-color: lightblue;
+    margin-left: 30px;
+    padding: 10px;
+    border-radius: 30px; }
 
-.cartContainer {
+#cartContainer {
   margin-bottom: 100px;
   width: 100%;
   display: flex;
   flex-flow: column;
   align-items: center;
   gap: 30px; }
-  .cartContainer .cartRow {
+  #cartContainer .cartRow {
     background-image: linear-gradient(to left, #3b1b86, lightblue);
     border: 1px solid gray;
     width: 70%;
@@ -119,19 +127,29 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center; }
-    .cartContainer .cartRow .cartImg {
+    #cartContainer .cartRow .cartImg {
+      display: flex;
+      justify-content: center;
       width: 15%;
       /* EL CONTENEDOR DE LA IMAGEN OCUPA UN 15% DEL ANCHO DE CART ROW  */ }
-      .cartContainer .cartRow .cartImg img {
+      #cartContainer .cartRow .cartImg img {
         width: 100%;
         /* LA IMAGEN OCUPA UN 100% DE CART IMG (QUE OCUPA 15% DE CARTROW) */ }
-    .cartContainer .cartRow .cartTitle {
+    #cartContainer .cartRow .cartTitle {
       width: 35%;
-      margin-left: 16px; }
-    .cartContainer .cartRow .cartDesc {
-      width: 25%; }
-    .cartContainer .cartRow .cartPrice {
-      width: 25%; }
+      margin-left: 16px;
+      text-align: center; }
+    #cartContainer .cartRow .cartDesc {
+      width: 25%;
+      text-align: center; }
+    #cartContainer .cartRow .cartPrice {
+      width: 25%;
+      text-align: center; }
+    #cartContainer .cartRow .borrarJuego {
+      padding: 25px;
+      cursor: pointer; }
+      #cartContainer .cartRow .borrarJuego img {
+        width: 30px; }
 
 /* BOTONES PARA VACIAR, FINALIZAR COMPRA, IR A SECCION PRODUCTOS */
 .buttonClass {
@@ -143,29 +161,33 @@ footer {
   .buttonClass .vaciar {
     background-color: violet;
     padding: 15px; }
-    .buttonClass .vaciar:focus {
-      background-image: linear-gradient(to bottom, violet, #100544);
+    .buttonClass .vaciar:active {
       color: whitesmoke; }
+    .buttonClass .vaciar:hover {
+      background-image: linear-gradient(to bottom, transparent, #462246); }
   .buttonClass .finalizarCompra {
     background-color: violet;
     padding: 15px; }
-    .buttonClass .finalizarCompra:focus {
-      background-image: linear-gradient(to bottom, violet, #100544);
+    .buttonClass .finalizarCompra:active {
       color: whitesmoke; }
+    .buttonClass .finalizarCompra:hover {
+      background-image: linear-gradient(to bottom, transparent, #462246); }
   .buttonClass .verProductos {
     background-color: violet;
     padding: 15px; }
-    .buttonClass .verProductos:focus {
-      background-image: linear-gradient(to bottom, violet, #100544);
+    .buttonClass .verProductos:active {
       color: whitesmoke; }
+    .buttonClass .verProductos:hover {
+      background-image: linear-gradient(to bottom, transparent, #462246); }
   .buttonClass .irArriba {
     margin-top: 60px;
     background-color: #040429;
     color: whitesmoke;
     padding: 15px; }
-    .buttonClass .irArriba:focus {
-      background-image: linear-gradient(to bottom, violet, #100544);
+    .buttonClass .irArriba:active {
       color: whitesmoke; }
+    .buttonClass .irArriba:hover {
+      background-image: linear-gradient(to bottom, transparent, #462246); }
 
 /* --------------- MOBILE RESPONSIVE --------------- */
 @media screen and (min-width: 0px) and (max-width: 450px) {
@@ -176,7 +198,7 @@ footer {
     margin-bottom: 30px; }
   /* INDEX MOBILE */
   main {
-    margin-top: 5cm; }
+    margin-top: 3.5cm; }
   .carousel-item img {
     height: 170px; }
   #gameCards {
@@ -184,6 +206,20 @@ footer {
     align-items: center; }
     #gameCards .card {
       width: 70%; }
+  #cartContainer .cartRow {
+    flex-direction: column;
+    height: 100%;
+    align-items: space-between;
+    justify-content: space-between; }
+    #cartContainer .cartRow .cartTitle {
+      margin: 0 auto; }
+    #cartContainer .cartRow .cartImg {
+      display: flex;
+      justify-content: center; }
+      #cartContainer .cartRow .cartImg img {
+        width: 100px; }
+    #cartContainer .cartRow .cartDesc {
+      margin: 40px; }
   /* PRODUCTOS MOBILE    */
   /* FAQ MOBILE */
   /* CONTACTO MOBILE */ }
