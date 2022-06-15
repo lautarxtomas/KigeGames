@@ -170,7 +170,10 @@ const searchBar = () => {
         (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario)
     );
     console.log(resultadoBusqueda)
-    renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
+
+    if (busquedaUsuario != ''){
+        renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
+    }
     
 }
 
