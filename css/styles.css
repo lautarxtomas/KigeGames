@@ -49,8 +49,7 @@ footer {
   max-height: 550px;
   position: center; }
 
-.carousel-inner .carousel-gow
-img {
+.carousel-inner .carousel-gow img {
   object-fit: cover;
   object-position: top; }
 
@@ -59,12 +58,12 @@ img {
   justify-content: center;
   margin-top: 1.5cm; }
 
-#gameCards {
+#gameCards, #juegoBuscado {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   width: 100%; }
-  #gameCards .card {
+  #gameCards .card, #juegoBuscado .card {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,15 +72,15 @@ img {
     border: 1px solid whitesmoke;
     border-radius: 20px;
     margin: 25px; }
-    #gameCards .card:hover {
+    #gameCards .card:hover, #juegoBuscado .card:hover {
       background-image: linear-gradient(to left, #fffffb, #d8caca); }
-    #gameCards .card .cardImg {
+    #gameCards .card .cardImg, #juegoBuscado .card .cardImg {
       width: 80%; }
-    #gameCards .card .cardPrice {
+    #gameCards .card .cardPrice, #juegoBuscado .card .cardPrice {
       font-size: 30px;
       font-weight: 600;
       margin-bottom: 10px; }
-    #gameCards .card .buttonCTA {
+    #gameCards .card .buttonCTA, #juegoBuscado .card .buttonCTA {
       margin: 10px 0;
       background-color: #d84d4d;
       color: #f7f7f7;
@@ -91,7 +90,7 @@ img {
       border: none;
       border-radius: 10px;
       cursor: pointer; }
-    #gameCards .card .buttonCTA:hover {
+    #gameCards .card .buttonCTA:hover, #juegoBuscado .card .buttonCTA:hover {
       background-color: #b84040;
       box-shadow: 1px 1px 10px lightgrey; }
 
@@ -201,10 +200,10 @@ img {
     margin-top: 3.5cm; }
   .carousel-item img {
     height: 170px; }
-  #gameCards {
+  #gameCards, #juegoBuscado {
     flex-direction: column;
     align-items: center; }
-    #gameCards .card {
+    #gameCards .card, #juegoBuscado .card {
       width: 70%; }
   #cartContainer .cartRow {
     flex-direction: column;
@@ -235,7 +234,7 @@ img {
   .carousel-item img {
     width: 100%;
     height: 300px; }
-  #gameCards .card {
+  #gameCards .card, #juegoBuscado .card {
     width: 40%; }
   /* PRODUCTOS TABLET    */
   /* FAQ TABLET */

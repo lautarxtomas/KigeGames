@@ -6,10 +6,12 @@ const subtotal = document.querySelector(".subtotal")
 
 
 
+
+
 // JUEGOS DEL INDEX
 
-renderizarListaJuegos = (array) => {
-    gameCards.innerHTML = ''
+renderizarListaJuegos = (array, container) => {
+    container.innerHTML = ''
     array.forEach((juego) => {
         const card = document.createElement('div')
         card.className = 'card'
@@ -20,7 +22,7 @@ renderizarListaJuegos = (array) => {
                 <span class="cardPrice"> $${juego.precio} </span>
                 <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
             `
-        gameCards.append(card)
+        container.append(card)
     })
     listenerBotonCarrito()
 }
@@ -74,10 +76,12 @@ const renderizarCarrito = () => {
         <div class="borrarJuego" data-id="${juego.id}">  <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" alt="">  </div>
         `
         cartContainer.append(cartRow)
+        totalItemsInCart.innerHTML = carrito.length
     })
     document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
         botonDeBorrar.addEventListener('click', eliminarJuegoDelCarrito)
     })
+
     
 }
 
@@ -137,6 +141,7 @@ const vaciarCarrito = () => {
     }
     carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
     renderizarCarrito()
+    totalItemsInCart.innerHTML = ''
 }
 
 const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
@@ -165,7 +170,8 @@ const searchBar = () => {
         (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario)
     );
     console.log(resultadoBusqueda)
-    renderizarListaJuegos(resultadoBusqueda)
+    renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
+    
 }
 
 buttonSearch.addEventListener('click', searchBar)
@@ -177,6 +183,6 @@ buttonSearch.addEventListener('click', searchBar)
 
 // LLAMADOS
 
-renderizarListaJuegos(videojuegos)
+renderizarListaJuegos(videojuegos, gameCards)
 // renderizarListaProductos(videojuegosProductos)
 
