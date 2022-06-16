@@ -27,24 +27,6 @@ renderizarListaJuegos = (array, container) => {
     listenerBotonCarrito()
 }
 
-//   const containerProductos = document.querySelector('#containerProductos')
-
-//   renderizarListaProductos = (array) => {
-//     array.forEach((juego) => {
-//         const card = document.createElement('div')
-//         card.classname = 'card'
-//         card.innerHTML = `
-//                 <h3 class="cardTitle"> ${juego.nombre} </h3>
-//                 <img src="${juego.imgSrc}" class="cardImg">
-//                 <p class="cardDesc"> ${juego.consola} </p>
-//                 <span class="cardPrice"> $${juego.precio} </span>
-//                 <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
-//             `
-//         containerProductos.append(card)
-//     })
-//     listenerBotonCarrito()
-//   }
-
 
 let carrito = []
 
@@ -76,12 +58,13 @@ const renderizarCarrito = () => {
         <div class="borrarJuego" data-id="${juego.id}">  <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" alt="">  </div>
         `
         cartContainer.append(cartRow)
-        totalItemsInCart.innerHTML = carrito.length
-    })
-    document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
-        botonDeBorrar.addEventListener('click', eliminarJuegoDelCarrito)
     })
 
+     document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
+         botonDeBorrar.addEventListener('click', eliminarJuegoDelCarrito)
+     })
+
+     totalItemsInCart.innerHTML = carrito.length
     
 }
 
@@ -95,13 +78,19 @@ function descuento(total, descuento) {
 const totalCarrito = () => {
     let montoTotal = 0
     carrito.forEach((videojuego) => {
-        montoTotal = montoTotal + videojuego.precio
+        montoTotal+= videojuego.precio
     })
-    if (montoTotal >= 8000){
-            descuento (montoTotal, 500)
-    } else {
-        alert('Su precio a pagar es de $' + montoTotal)
-    }
+
+    montoTotal >= 8000 ? descuento(montoTotal, 500) : alert('Su precio a pagar es de $' + montoTotal)
+
+    // LO DE ARRIBA ES IGUAL QUE ESTO
+
+    // if (montoTotal >= 8000){
+    //         descuento (montoTotal, 500)
+    // } else {
+    //     alert('Su precio a pagar es de $' + montoTotal)
+    // }
+
     alert('MUCHAS GRACIAS POR SU COMPRA!')
     vaciarCarrito()
 }
@@ -127,26 +116,24 @@ const listenerBotonCarrito = () => {
 }
 
 // Al cargar la pagina, verifico que exista algo guardado en el carrito (gracias al local storage) y lo imprimo
-if (localStorage.getItem('carrito')) {
-    carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion renderizarCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
-    renderizarCarrito()
-}
+  if (localStorage.getItem('carrito')) {
+      carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion renderizarCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
+      renderizarCarrito()
+  }
 
-
-// BOTON PARA VACIAR EL CARRITO
+ 
 
 const vaciarCarrito = () => {
-    if (localStorage.getItem('carrito')) {
-        localStorage.removeItem('carrito') // Al borrar los productos del local storage, no aparecerían de nuevo en pantalla cuando recarguemos la página
-    }
+    // Al borrar los productos del local storage, no aparecerían de nuevo en pantalla cuando recarguemos la página
+    localStorage.getItem('carrito') && localStorage.removeItem('carrito') // SI ENCUENTRA ALGO EN EL CARRITO, LO BORRA
     carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
     renderizarCarrito()
-    totalItemsInCart.innerHTML = ''
+    totalItemsInCart.innerHTML = carrito.length
 }
 
+// BOTON PARA VACIAR EL CARRITO
 const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
 vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
-
 
 
 // BOTON PARA FINALIZAR COMPRA
@@ -169,8 +156,7 @@ const searchBar = () => {
     const resultadoBusqueda = videojuegos.filter(
         (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario)
     );
-    console.log(resultadoBusqueda)
-
+    
     if (busquedaUsuario != ''){
         renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
     }
