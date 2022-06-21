@@ -91,7 +91,7 @@ const totalCarrito = () => {
     //     alert('Su precio a pagar es de $' + montoTotal)
     // }
 
-    Swal.fire('MUCHAS GRACIAS POR SU COMPRA!')
+    // Swal.fire('MUCHAS GRACIAS POR SU COMPRA!')
     vaciarCarrito()
 }
     
