@@ -5,9 +5,6 @@ const totalItemsInCart = document.querySelector(".totalItemsCarrito");
 const subtotal = document.querySelector(".subtotal")
 
 
-
-
-
 // JUEGOS DEL INDEX
 
 renderizarListaJuegos = (array, container) => {
@@ -27,19 +24,10 @@ renderizarListaJuegos = (array, container) => {
     listenerBotonCarrito()
 }
 
+// CARRITO
+
 
 let carrito = []
-
-
-// ELIMINAR JUEGO DEL CARRITO
-
-const eliminarJuegoDelCarrito = (e) => {
-    const juegoIdSelected = e.target.closest('.borrarJuego').getAttribute('data-id')
-    carrito = carrito.filter((juego) => juego.id != juegoIdSelected)
-    renderizarCarrito()
-}
-
-
 
 // Funcion para renderizar el carrito cada vez que se actualiza el array
 const renderizarCarrito = () => {
@@ -60,6 +48,7 @@ const renderizarCarrito = () => {
         cartContainer.append(cartRow)
     })
 
+    // BOTON DE C/CARD PARA ELIMINAR JUEGO DEL CARRITO
      document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
          botonDeBorrar.addEventListener('click', eliminarJuegoDelCarrito)
      })
@@ -68,21 +57,155 @@ const renderizarCarrito = () => {
     
 }
 
-// FUNCION PARA CALCULAR TOTAL CARRITO Y APLICAR DESCUENTO
 
-function descuento(total, descuento) {
-    let res = total - descuento
-    Swal.fire('Por esta semana usted obtiene un descuento de $' + descuento + ' al pasar los $8000. Su precio a pagar es de $' + res)
+// FUNCION PARA AGREGAR JUEGOS AL CARRITO
+const agregarJuegoAlCarrito = (e) => {
+   
+    const juegoElegido = e.target.getAttribute('data-id')
+    const videojuego = videojuegos.find((juego) => juego.id ==  juegoElegido)
+    carrito.push(videojuego)
+    Toastify({
+        text: `${videojuego.nombre} agregado al carrito`,
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, violet, rgb(70, 34, 70))",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+    renderizarCarrito()
+    localStorage.setItem('carrito', JSON.stringify(carrito)) 
 }
 
+// BOTON PARA AGREGAR JUEGO AL CARRITO
+const listenerBotonCarrito = () => {
+    const botonesCompra = document.querySelectorAll('.buttonCTA')
+    botonesCompra.forEach((botonCompra) => {
+        botonCompra.addEventListener('click', agregarJuegoAlCarrito)
+    })
+}
+
+// ELIMINAR JUEGO DEL CARRITO
+const eliminarJuegoDelCarrito = (e) => {
+    const juegoIdSelected = e.target.closest('.borrarJuego').getAttribute('data-id')
+    carrito = carrito.filter((juego) => juego.id != juegoIdSelected)
+    localStorage.setItem('carrito', JSON.stringify(carrito)) // CUANDO BORRAMOS UN VALUE (JUEGO) DEL CARRITO, CON ESTA LINEA HAGO ALGO SIMILAR A LO QUE HICE ARRIBA SOLO QUE APLICANDOSELO AL LOCALSTORAGE
+    
+    Toastify({
+        text: `El juego ha sido eliminado del carrito`,
+        duration: 3000,
+        destination: "https://github.com/apvarun/toastify-js",
+        newWindow: true,
+        close: true,
+        gravity: "bottom", // `top` or `bottom`
+        position: "left", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, red, rgb(70, 34, 70))",
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+
+    renderizarCarrito()
+}
+
+
+// Al cargar la pagina, verifico que exista algo guardado en el carrito (gracias al local storage) y lo imprimo
+  if (localStorage.getItem('carrito')) {
+      carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion renderizarCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
+      renderizarCarrito()
+  }
+
+    
+// --------------------------------------
+
+
+
+// BOTON PARA VACIAR EL CARRITO
+const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
+// vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
+vaciarCarritoBtn.addEventListener('click', () => {
+    if (localStorage.getItem('carrito')) {  // VERIFICO QUE EXISTA ALGO EN EL CARRITO CUANDO APRIETO EL BOTON DE VACIAR ANTES DE EJECUTAR EL ALERT
+        
+        Swal.fire({
+            title: 'Estas seguro?',
+            text: "No vas a poder deshacerlo!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sí, quiero vaciar el carrito!',
+            cancelButtonText: 'Cancelar'
+            
+          }).then((result) => {
+            if (result.isConfirmed) {
+            vaciarCarrito(),
+              Swal.fire(
+                'Carrito vaciado!',
+                'El carrito fue vaciado correctamente.',
+                'success'
+              )
+            }
+          })
+
+    } else { 
+        Swal.fire(
+            'NO HAY NADA POR VACIAR EN EL CARRITO',
+            'Agrega algo al carrito antes de apretar el boton!',
+            'question'
+        )
+    }
+   
+})
+
+// FUNCION PARA VACIAR EL CARRITO
+const vaciarCarrito = () => {
+    // Al borrar los productos del local storage, no aparecerían de nuevo en pantalla cuando recarguemos la página
+    localStorage.getItem('carrito') && localStorage.removeItem('carrito') // SI ENCUENTRA ALGO EN EL CARRITO, LO BORRA
+    carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
+    renderizarCarrito()
+    totalItemsInCart.innerHTML = carrito.length
+}
+
+// ------------------------------------------------------
+
+// FUNCION PARA CALCULAR TOTAL CARRITO Y APLICAR DESCUENTO
+function descuento(total, descuento) {
+    let res = total - descuento
+    Swal.fire(
+        'GRACIAS POR TU COMPRA!',
+        'Por esta semana usted obtiene un descuento de $' + descuento + ' al pasar los $8000. Su precio a pagar es de $' + res,
+        'success'
+      )
+}
+
+// FUNCION PARA CALCULAR TOTAL CARRITO
 const totalCarrito = () => {
     let montoTotal = 0
     carrito.forEach((videojuego) => {
         montoTotal+= videojuego.precio
     })
 
-    montoTotal >= 8000 ? descuento(montoTotal, 500) : Swal.fire('Su precio a pagar es de $' + montoTotal)
-
+    if (localStorage.getItem('carrito')) {  // VERIFICO QUE EXISTA ALGO EN EL CARRITO CUANDO APRIETO EL BOTON DE FINALIZAR
+        montoTotal >= 8000 ? descuento(montoTotal, 500) : 
+        Swal.fire(
+            'GRACIAS POR TU COMPRA!',
+            'Su precio a pagar es de $' + montoTotal,
+            'success'
+        )
+    } else {
+        Swal.fire(
+            'NO HAY NADA AGREGADO EN EL CARRITO',
+            'Agrega algo al carrito antes de apretar el boton!',
+            'question'
+        )
+    }
+    
     // LO DE ARRIBA ES IGUAL QUE ESTO
 
     // if (montoTotal >= 8000){
@@ -92,73 +215,12 @@ const totalCarrito = () => {
     // }
 
     // Swal.fire('MUCHAS GRACIAS POR SU COMPRA!')
+
     vaciarCarrito()
 }
-    
-// --------------------------------------
-
-// BOTONES PARA AGREGAR JUEGOS AL CARRITO
-
-const agregarJuegoAlCarrito = (e) => {
-   
-    const juegoElegido = e.target.getAttribute('data-id')
-    const videojuego = videojuegos.find((juego) => juego.id ==  juegoElegido)
-    carrito.push(videojuego)
-    renderizarCarrito()
-    localStorage.setItem('carrito', JSON.stringify(carrito)) 
-}
-
-const listenerBotonCarrito = () => {
-    const botonesCompra = document.querySelectorAll('.buttonCTA')
-    botonesCompra.forEach((botonCompra) => {
-        botonCompra.addEventListener('click', agregarJuegoAlCarrito)
-    })
-}
-
-// Al cargar la pagina, verifico que exista algo guardado en el carrito (gracias al local storage) y lo imprimo
-  if (localStorage.getItem('carrito')) {
-      carrito = JSON.parse(localStorage.getItem('carrito')) // Si encuentra algo, lo parseamos para poder manipular los productos del array del carrito y, una vez convertido, llamamos a la funcion renderizarCarrito. Si no ponemos esto, cuando recarguemos la página los productos añadidos al carrito van a desaparecer.
-      renderizarCarrito()
-  }
-
- 
-
-const vaciarCarrito = () => {
-    // Al borrar los productos del local storage, no aparecerían de nuevo en pantalla cuando recarguemos la página
-    localStorage.getItem('carrito') && localStorage.removeItem('carrito') // SI ENCUENTRA ALGO EN EL CARRITO, LO BORRA
-    carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
-    renderizarCarrito()
-    totalItemsInCart.innerHTML = carrito.length
-}
-
-// BOTON PARA VACIAR EL CARRITO
-const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
-// vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
-vaciarCarritoBtn.addEventListener('click', () => {
-    Swal.fire({
-        title: 'Estas seguro?',
-        text: "No vas a poder deshacerlo!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, quiero vaciar el carrito!',
-        cancelButtonText: 'Cancelar'
-        
-      }).then((result) => {
-        if (result.isConfirmed) {
-        vaciarCarrito(),
-          Swal.fire(
-            'Carrito vaciado!',
-            'El carrito fue vaciado correctamente.',
-            'success'
-          )
-        }
-      })
-})
 
 
-// BOTON PARA FINALIZAR COMPRA
+// BOTON PARA FINALIZAR COMPRA (CALCULAR TOTAL CARRITO)
 const finalizarCompra = document.querySelector('.finalizarCompra')
 finalizarCompra.addEventListener('click', totalCarrito)
 
@@ -188,8 +250,7 @@ const searchBar = () => {
 buttonSearch.addEventListener('click', searchBar)
 
 
-//  FIN SEARCH
-
+// ----------------------------------------------
 
 
 // LLAMADOS
