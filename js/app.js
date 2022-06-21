@@ -133,7 +133,27 @@ const vaciarCarrito = () => {
 
 // BOTON PARA VACIAR EL CARRITO
 const vaciarCarritoBtn = document.querySelector('#vaciarCarrito')
-vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
+// vaciarCarritoBtn.addEventListener('click', vaciarCarrito)
+vaciarCarritoBtn.addEventListener('click', () => {
+    Swal.fire({
+        title: 'Estas seguro?',
+        text: "No vas a poder deshacerlo!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sí, quiero vaciar el carrito!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+        vaciarCarrito(),
+          Swal.fire(
+            'Carrito vaciado!',
+            'El carrito fue vaciado correctamente.',
+            'success'
+          )
+        }
+      })
+})
 
 
 // BOTON PARA FINALIZAR COMPRA
