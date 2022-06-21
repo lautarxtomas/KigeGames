@@ -72,7 +72,7 @@ const renderizarCarrito = () => {
 
 function descuento(total, descuento) {
     let res = total - descuento
-    alert('Por esta semana usted obtiene un descuento de $' + descuento + ' al pasar los $8000. Su precio a pagar es de $' + res)
+    Swal.fire('Por esta semana usted obtiene un descuento de $' + descuento + ' al pasar los $8000. Su precio a pagar es de $' + res)
 }
 
 const totalCarrito = () => {
@@ -81,7 +81,7 @@ const totalCarrito = () => {
         montoTotal+= videojuego.precio
     })
 
-    montoTotal >= 8000 ? descuento(montoTotal, 500) : alert('Su precio a pagar es de $' + montoTotal)
+    montoTotal >= 8000 ? descuento(montoTotal, 500) : Swal.fire('Su precio a pagar es de $' + montoTotal)
 
     // LO DE ARRIBA ES IGUAL QUE ESTO
 
@@ -91,7 +91,7 @@ const totalCarrito = () => {
     //     alert('Su precio a pagar es de $' + montoTotal)
     // }
 
-    alert('MUCHAS GRACIAS POR SU COMPRA!')
+    Swal.fire('MUCHAS GRACIAS POR SU COMPRA!')
     vaciarCarrito()
 }
     
@@ -142,7 +142,9 @@ vaciarCarritoBtn.addEventListener('click', () => {
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sí, quiero vaciar el carrito!'
+        confirmButtonText: 'Sí, quiero vaciar el carrito!',
+        cancelButtonText: 'Cancelar'
+        
       }).then((result) => {
         if (result.isConfirmed) {
         vaciarCarrito(),
