@@ -3,6 +3,7 @@ const gameCards = document.querySelector('#gameCards')
 const cartContainer = document.querySelector('#cartContainer')
 const totalItemsInCart = document.querySelector(".totalItemsCarrito");
 const subtotal = document.querySelector(".subtotal")
+const cantidadJuego = document.querySelector(".cartCantidad")
 
 
 // JUEGOS DEL INDEX
@@ -29,6 +30,7 @@ renderizarListaJuegos = (array, container) => {
 
 let carrito = []
 
+
 // Funcion para renderizar el carrito cada vez que se actualiza el array
 const renderizarCarrito = () => {
     cartContainer.innerHTML = ''
@@ -42,11 +44,34 @@ const renderizarCarrito = () => {
         <div class="cartTitle"><b> ${juego.nombre}</b></div>
         <div class="cartDesc"><b> ${juego.consola}</b></div>
         <div class="cartPrice"><b> $${juego.precio}</b></div>
+        <div class="cartCantidad"> 
+        <button class="restarCantidad" onclick="modificarCantidad("minus", ${juego.id})"> <b> - </b> </button> 
+        <div class="number"> <b> ${juego.cantidad} </b> </div> 
+        <button class="sumarCantidad" onclick="modificarCantidad("plus", ${juego.id})"> <b> + </b> </button>
+        
+        </div>
         
         <div class="borrarJuego" data-id="${juego.id}">  <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" alt="">  </div>
         `
         cartContainer.append(cartRow)
     })
+
+    // MODIFICAR CANTIDAD DE JUEGOS
+
+    // const modificarCantidad = (accion, id) => {
+    //     const juegoIdSelected = e.target.getAttribute('data-id')
+    //     const juegoAModificar = carrito.find((juego) => juego.id == juegoIdSelected)
+    
+    //         if (id === juegoAModificar.id) {
+    //             if (accion === "minus" && numberOfUnits > 1) {
+    //                 numberOfUnits--
+    //             } else if (accion === "plus"){
+    //                 numberOfUnits++
+    //             }
+    //         }
+    
+    // }
+
 
     // BOTON DE C/CARD PARA ELIMINAR JUEGO DEL CARRITO
      document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
@@ -61,23 +86,41 @@ const renderizarCarrito = () => {
 // FUNCION PARA AGREGAR JUEGOS AL CARRITO
 const agregarJuegoAlCarrito = (e) => {
    
-    const juegoElegido = e.target.getAttribute('data-id')
-    const videojuego = videojuegos.find((juego) => juego.id ==  juegoElegido)
-    carrito.push(videojuego)
-    Toastify({
-        text: `${videojuego.nombre} agregado al carrito`,
-        duration: 3000,
-        destination: "https://github.com/apvarun/toastify-js",
-        newWindow: true,
-        close: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
-        style: {
-          background: "linear-gradient(to right, violet, rgb(70, 34, 70))",
-        },
-        onClick: function(){} // Callback after click
-      }).showToast();
+    const juegoIdSelected = e.target.getAttribute('data-id')
+    const videojuegoSelected = videojuegos.find((juego) => juego.id == juegoIdSelected)
+
+    const juegoParaAgregar = {
+        ...videojuegoSelected,
+        cantidad: 1
+    }
+
+    const juegoYaSeleccionado = carrito.find((juego) => juego.id == juegoParaAgregar.id)
+
+    if (!juegoYaSeleccionado) { // SI NO ENCUENTRA EN EL CARRITO EL JUEGO SELECCIONADO, LO AGREGA
+        carrito.push(juegoParaAgregar) // UNICAMENTE LOS VIDEOJUEGOS QUE ESTEN ADENTRO DEL CARRITO VAN A TENER LA PROPIEDAD "CANTIDAD", YA QUE VIENEN DEL NUEVO OBJETO juegoParaAgregar
+        
+        Toastify({
+            text: `${videojuegoSelected.nombre} agregado al carrito`,
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "left", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+              background: "linear-gradient(to right, violet, rgb(70, 34, 70))",
+            },
+            onClick: function(){} // Callback after click
+          }).showToast();
+          
+    } else {
+        juegoYaSeleccionado.cantidad++
+
+    }
+    
+    console.log(juegoYaSeleccionado)
+
     renderizarCarrito()
     localStorage.setItem('carrito', JSON.stringify(carrito)) 
 }
@@ -188,7 +231,7 @@ function descuento(total, descuento) {
 const totalCarrito = () => {
     let montoTotal = 0
     carrito.forEach((videojuego) => {
-        montoTotal+= videojuego.precio
+        montoTotal+= videojuego.precio * videojuego.cantidad
     })
 
     if (localStorage.getItem('carrito')) {  // VERIFICO QUE EXISTA ALGO EN EL CARRITO CUANDO APRIETO EL BOTON DE FINALIZAR

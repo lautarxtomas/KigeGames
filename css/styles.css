@@ -69,6 +69,7 @@ footer {
     align-items: center;
     width: 20%;
     padding: 25px;
+    background-color: transparent;
     border: 1px solid whitesmoke;
     border-radius: 20px;
     margin: 25px; }
@@ -144,11 +145,26 @@ footer {
     #cartContainer .cartRow .cartPrice {
       width: 25%;
       text-align: center; }
+    #cartContainer .cartRow .cartCantidad {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: violet;
+      margin-right: 30px;
+      border-radius: 10px; }
+      #cartContainer .cartRow .cartCantidad .restarCantidad, #cartContainer .cartRow .cartCantidad .sumarCantidad {
+        margin: 10px;
+        border: none; }
+        #cartContainer .cartRow .cartCantidad .restarCantidad:hover, #cartContainer .cartRow .cartCantidad .sumarCantidad:hover {
+          background-image: linear-gradient(to bottom, transparent, gray); }
     #cartContainer .cartRow .borrarJuego {
       padding: 25px;
       cursor: pointer; }
       #cartContainer .cartRow .borrarJuego img {
         width: 30px; }
+        #cartContainer .cartRow .borrarJuego img:hover {
+          background-color: violet;
+          border-radius: 30px; }
 
 /* BOTONES PARA VACIAR, FINALIZAR COMPRA, IR A SECCION PRODUCTOS */
 .buttonClass {
@@ -219,6 +235,9 @@ footer {
         width: 100px; }
     #cartContainer .cartRow .cartDesc {
       margin: 40px; }
+    #cartContainer .cartRow .cartCantidad {
+      margin: 0 auto;
+      margin-top: 30px; }
   /* PRODUCTOS MOBILE    */
   /* FAQ MOBILE */
   /* CONTACTO MOBILE */ }
