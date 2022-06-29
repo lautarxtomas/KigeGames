@@ -1,3 +1,5 @@
+// MODIFICACIONES DE LA ESTRUCTURA GENERALES
+
 body{
     font-family: 'Oxanium';
     background-color: rgb(233, 220, 220);
@@ -32,11 +34,7 @@ main{
     section{
         margin-top: 1cm;
     }
-
 }
-
-
-
 
 footer {
     background-color: rgb(4, 4, 48);
@@ -54,14 +52,13 @@ footer {
             color: violet;
           }
         svg:hover{
-                width: 60px;
-                height: 60px; 
+                color: rgb(152, 177, 179);
             }
         }   
     }
     
 
-
+/* ----------------------------------------------------------- *\
 
 
 
@@ -147,7 +144,7 @@ footer {
 
 
 
-/* CARRITO */
+// CARRITO
 
 .cartHeader {
     display: flex;
@@ -313,7 +310,20 @@ footer {
     }
 }
     
+
+
+
+
+/* --------------- INDEX DESKTOP --------------- */
     
+
+//  .mainProductos{
+//         margin-top: 3.5cm;
+//         width: 100%;
+        
+//     }
+
+
 
 
 /* --------------- MOBILE RESPONSIVE --------------- */

@@ -4,6 +4,12 @@ const cartContainer = document.querySelector('#cartContainer')
 const totalItemsInCart = document.querySelector(".totalItemsCarrito");
 const subtotal = document.querySelector(".subtotal")
 const cantidadJuego = document.querySelector(".cartCantidad")
+const containerProductos = document.querySelector("#containerProductos")
+
+
+
+let videojuegos = []
+let videojuegosProductos = []
 
 
 // JUEGOS DEL INDEX
@@ -30,7 +36,6 @@ renderizarListaJuegos = (array, container) => {
 
 let carrito = []
 
-
 // Funcion para renderizar el carrito cada vez que se actualiza el array
 const renderizarCarrito = () => {
     cartContainer.innerHTML = ''
@@ -45,9 +50,9 @@ const renderizarCarrito = () => {
         <div class="cartDesc"><b> ${juego.consola}</b></div>
         <div class="cartPrice"><b> $${juego.precio}</b></div>
         <div class="cartCantidad"> 
-        <button class="restarCantidad" onclick="modificarCantidad("minus", ${juego.id})"> <b> - </b> </button> 
+        <button class="restarCantidad" onclick="restarCantidad(${juego.id})"> <b> - </b> </button> 
         <div class="number"> <b> ${juego.cantidad} </b> </div> 
-        <button class="sumarCantidad" onclick="modificarCantidad("plus", ${juego.id})"> <b> + </b> </button>
+        <button class="sumarCantidad" onclick="sumarCantidad(${juego.id})"> <b> + </b> </button>
         
         </div>
         
@@ -56,23 +61,6 @@ const renderizarCarrito = () => {
         cartContainer.append(cartRow)
     })
 
-    // MODIFICAR CANTIDAD DE JUEGOS
-
-    // const modificarCantidad = (accion, id) => {
-    //     const juegoIdSelected = e.target.getAttribute('data-id')
-    //     const juegoAModificar = carrito.find((juego) => juego.id == juegoIdSelected)
-    
-    //         if (id === juegoAModificar.id) {
-    //             if (accion === "minus" && numberOfUnits > 1) {
-    //                 numberOfUnits--
-    //             } else if (accion === "plus"){
-    //                 numberOfUnits++
-    //             }
-    //         }
-    
-    // }
-
-
     // BOTON DE C/CARD PARA ELIMINAR JUEGO DEL CARRITO
      document.querySelectorAll('.borrarJuego').forEach((botonDeBorrar) => {
          botonDeBorrar.addEventListener('click', eliminarJuegoDelCarrito)
@@ -80,6 +68,29 @@ const renderizarCarrito = () => {
 
      totalItemsInCart.innerHTML = carrito.length
     
+}
+
+const sumarCantidad = (id) => {
+    const juegoAModificar = carrito.find((juego) => juego.id === id)
+    juegoAModificar.cantidad++
+    localStorage.setItem("carrito", JSON.stringify(carrito)) // CADA VEZ QUE HACEMOS ALGUNA MODIFICACION EN EL CARRITO, HAY QUE SETEARLO EN EL LOCAL STORAGE, PONER EL STRINGIFY DEL CARRITO, Y VOLVER A RENDERIZAR
+    renderizarCarrito()
+}
+
+const restarCantidad = (id) => {
+    const juegoAModificar = carrito.find((juego) => juego.id === id)
+    const indiceDeJuego = carrito.indexOf(juegoAModificar) // guardamos la posicion del juego en el array del carrito
+
+    if (juegoAModificar.cantidad > 1) {
+        juegoAModificar.cantidad--
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+        renderizarCarrito()
+    } 
+    else {
+        carrito.splice(indiceDeJuego, 1); // adentro del carrito, nos paramos en el indice del juego y eliminamos 1 (en este caso, el unico juego a modificar)
+        localStorage.setItem("carrito", JSON.stringify(carrito))
+        renderizarCarrito()
+    }
 }
 
 
@@ -116,11 +127,8 @@ const agregarJuegoAlCarrito = (e) => {
           
     } else {
         juegoYaSeleccionado.cantidad++
-
     }
     
-    console.log(juegoYaSeleccionado)
-
     renderizarCarrito()
     localStorage.setItem('carrito', JSON.stringify(carrito)) 
 }
@@ -295,9 +303,30 @@ buttonSearch.addEventListener('click', searchBar)
 
 // ----------------------------------------------
 
+// FETCH
+
+fetch('../data/videojuegos.json')
+.then((res) => res.json())
+.then((jsonResponse) => {
+    videojuegos = jsonResponse.data // GUARDO EN EL ARRAY VIDEOJUEGOS (DECLARADO AL PRINCIPIO) LO QUE ENCONTRO ADENTRO DE "DATA" EN VIDEOJUGOS.JSON
+    // videojuegosProductos = jsonResponse.data2
+    renderizarListaJuegos(videojuegos, gameCards)
+    // renderizarListaJuegos(videojuegosProductos, containerProductos)
+})
+
+
+// ASYNC - AWAIT --> SE PUEDE HACER ESTO EN VEZ DEL FETCH
+
+// const cargarListaJuegos = async () => {
+//     const res = await fetch('../data/videojuegos.json')
+//     const { data } = await res.json()
+//     videojuegos = data
+//     renderizarListaJuegos(videojuegos, gameCards)
+// }
 
 // LLAMADOS
 
-renderizarListaJuegos(videojuegos, gameCards)
-// renderizarListaProductos(videojuegosProductos)
+// cargarListaJuegos()
+
+// ---------------------------------------------------------------
 

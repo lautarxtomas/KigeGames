@@ -39,8 +39,11 @@ footer {
     footer .flex-icons svg {
       color: violet; }
     footer .flex-icons svg:hover {
-      width: 60px;
-      height: 60px; }
+      color: #98b1b3; }
+
+/* ----------------------------------------------------------- *\
+
+
 
 /* --------------- INDEX DESKTOP --------------- */
 /* PRODUCTOS INDEX */
@@ -95,7 +98,6 @@ footer {
       background-color: #b84040;
       box-shadow: 1px 1px 10px lightgrey; }
 
-/* CARRITO */
 .cartHeader {
   display: flex;
   justify-content: center;
@@ -204,6 +206,7 @@ footer {
     .buttonClass .irArriba:hover {
       background-image: linear-gradient(to bottom, transparent, #462246); }
 
+/* --------------- INDEX DESKTOP --------------- */
 /* --------------- MOBILE RESPONSIVE --------------- */
 @media screen and (min-width: 0px) and (max-width: 450px) {
   .cartIcon {

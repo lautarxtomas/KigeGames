@@ -1,0 +1,126 @@
+{ 
+    "data": [
+        {
+            "nombre": "Fifa 22",
+            "consola": "PS4",
+            "precio": 6000,
+            "genero": "deportes",
+            "imgSrc": "https://i.blogs.es/0a2b76/e53cynvwuaix9pa/450_1000.jpeg",
+            "id": 1
+        },
+        {
+            "nombre": "Persona 5",
+            "consola": "PS4",
+            "precio": 4000,
+            "genero": "rpg",
+            "imgSrc": "https://playtecgames.com/wp-content/uploads/2020/08/persona-5-royal.jpg",
+            "id": 2
+        },
+        {
+            "nombre": "God of War",
+            "consola": "PS4",
+            "precio": 5000,
+            "genero": "accion",
+            "imgSrc": "https://m.media-amazon.com/images/I/711lrrvzt+L._SL1496_.jpg",
+            "id": 3
+        },
+        {
+            "nombre": "Alien: Isolation",
+            "consola": "PS4",
+            "precio": 2000,
+            "genero": "terror",
+            "imgSrc": "https://juegosdigitalesargentina.com/files/images/productos/1495070916-alien-isolation-the-collection-ps4.jpg",
+            "id": 4
+        },
+        {
+            "nombre": "PES 2021",
+            "consola": "PS4",
+            "precio": 3000,
+            "genero": "deportes",
+            "imgSrc": "https://www.portalgames.com.ar/wp-content/uploads/2020/09/pes-2021.jpg",
+            "id": 5
+        }
+    ],
+    "data2": [
+            {
+                "nombre": "Fifa 22",
+                "consola": "PS4",
+                "precio": 6000,
+                "genero": "deportes",
+                "imgSrc": "https://i.blogs.es/0a2b76/e53cynvwuaix9pa/450_1000.jpeg",
+                "id": 1
+            },
+            {
+                "nombre": "Persona 5",
+                "consola": "PS4",
+                "precio": 4000,
+                "genero": "rpg",
+                "imgSrc": "https://playtecgames.com/wp-content/uploads/2020/08/persona-5-royal.jpg",
+                "id": 2
+            },
+            {
+                "nombre": "God of War",
+                "consola": "PS4",
+                "precio": 5000,
+                "genero": "accion",
+                "imgSrc": "https://m.media-amazon.com/images/I/711lrrvzt+L._SL1496_.jpg",
+                "id": 3
+            },
+            {
+                "nombre": "Alien: Isolation",
+                "consola": "PS4",
+                "precio": 2000,
+                "genero": "terror",
+                "imgSrc": "https://juegosdigitalesargentina.com/files/images/productos/1495070916-alien-isolation-the-collection-ps4.jpg",
+                "id": 4
+            },
+            {
+                "nombre": "PES 2021",
+                "consola": "PS4",
+                "precio": 3000,
+                "genero": "deportes",
+                "imgSrc": "https://www.portalgames.com.ar/wp-content/uploads/2020/09/pes-2021.jpg",
+                "id": 5
+            },
+            {
+                "nombre": "Elden Ring",
+                "consola": "PS4",
+                "precio": 7500,
+                "genero": "rpg",
+                "imgSrc": "https://cdn2.spong.com/pack/e/l/eldenring455877l/_-Elden-Ring-PS4-_.jpg",
+                "id": "006"
+            },
+            {
+                "nombre": "Battlefield 1",
+                "consola": "PS4",
+                "precio": 1000,
+                "genero": "shooter",
+                "imgSrc": "https://m.media-amazon.com/images/I/81zk93c4ZoL._SX425_.jpg",
+                "id": "007"
+            },
+            {
+                "nombre": "Ghostwire Tokyo",
+                "consola": "PS5",
+                "precio": 7500,
+                "genero": "accion",
+                "imgSrc": "https://d3ugyf2ht6aenh.cloudfront.net/stores/002/070/737/products/ghostwire_tokyo-56201001-f0e71f1c9121043fa316473598447927-1024-1024.jpg",
+                "id": "008"
+            },
+            {
+                "nombre": "Spiderman",
+                "consola": "PS4",
+                "precio": 1500,
+                "genero": "accion",
+                "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/001/067/161/products/spiderman-cover-web1-184dc2d745e3baf2a115757759186392-640-0.png",
+                "id": "009"
+            },
+            {
+                "nombre": "Injustice 2",
+                "consola": "PS4",
+                "precio": 1000,
+                "genero": "lucha",
+                "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/353/484/products/best1-9e72856dcd3c9204c815863800631331-640-0.jpg",
+                "id": "0010"
+            }
+        ]
+}
