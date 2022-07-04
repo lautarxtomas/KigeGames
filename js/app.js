@@ -305,13 +305,11 @@ buttonSearch.addEventListener('click', searchBar)
 
 // FETCH
 
-fetch('../data/videojuegos.json')
+fetch('./data/videojuegos.json')
 .then((res) => res.json())
 .then((jsonResponse) => {
     videojuegos = jsonResponse.data // GUARDO EN EL ARRAY VIDEOJUEGOS (DECLARADO AL PRINCIPIO) LO QUE ENCONTRO ADENTRO DE "DATA" EN VIDEOJUGOS.JSON
-    // videojuegosProductos = jsonResponse.data2
     renderizarListaJuegos(videojuegos, gameCards)
-    // renderizarListaJuegos(videojuegosProductos, containerProductos)
 })
 
 
