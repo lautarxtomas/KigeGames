@@ -1,11 +1,20 @@
-// SELECCION DE ELEMENTOS
+// -------  SELECCION DE ELEMENTOS -------
+
+// CARD CONTAINER
 const gameCards = document.querySelector('#gameCards')
+
+// CART CONTAINER
 const cartContainer = document.querySelector('#cartContainer')
 const totalItemsInCart = document.querySelector(".totalItemsCarrito");
-const subtotal = document.querySelector(".subtotal")
 const cantidadJuego = document.querySelector(".cartCantidad")
-const containerProductos = document.querySelector("#containerProductos")
 
+// Boton Carrito
+const cartButton = document.querySelector('#cartButton')
+
+// MODAL
+const modal = document.querySelector('.modal')
+const modalClose = document.querySelector('.modalClose')
+const subtotal = document.querySelector(".subtotal")
 
 
 let videojuegos = []
@@ -67,7 +76,13 @@ const renderizarCarrito = () => {
      })
 
      totalItemsInCart.innerHTML = carrito.length
-    
+
+     let subtotalCarrito = 0
+     carrito.forEach((videojuego) => {
+        subtotalCarrito+= videojuego.precio * videojuego.cantidad
+        subtotal.innerHTML = ` <b> SUBTOTAL: $${subtotalCarrito} </b>` 
+    })
+     
 }
 
 const sumarCantidad = (id) => {
@@ -221,6 +236,7 @@ const vaciarCarrito = () => {
     carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
     renderizarCarrito()
     totalItemsInCart.innerHTML = carrito.length
+    subtotal.innerHTML = '<b> SUBTOTAL: $0 </b>'
 }
 
 // ------------------------------------------------------
@@ -246,7 +262,7 @@ const totalCarrito = () => {
         montoTotal >= 8000 ? descuento(montoTotal, 500) : 
         Swal.fire(
             'GRACIAS POR TU COMPRA!',
-            'Su precio a pagar es de $' + montoTotal,
+            'Su precio a pagar es de $' +  montoTotal,
             'success'
         )
     } else {
@@ -268,6 +284,7 @@ const totalCarrito = () => {
     // Swal.fire('MUCHAS GRACIAS POR SU COMPRA!')
 
     vaciarCarrito()
+    subtotal.innerHTML = ' <b> SUBTOTAL: $0 </b>'
 }
 
 
@@ -278,30 +295,6 @@ finalizarCompra.addEventListener('click', totalCarrito)
 
 // ------------------------------------------------
 
-
-// ------------ SEARCH BAR ------------
-
-
-const juegoBuscado = document.querySelector('#juegoBuscado')
-const formInput = document.querySelector('#searchInput')
-const buttonSearch = document.querySelector('#searchButton')
-
-const searchBar = () => {
-    const busquedaUsuario = formInput.value.toLowerCase()
-    const resultadoBusqueda = videojuegos.filter(
-        (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario)
-    );
-    
-    if (busquedaUsuario != ''){
-        renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
-    }
-    
-}
-
-buttonSearch.addEventListener('click', searchBar)
-
-
-// ----------------------------------------------
 
 // FETCH
 
@@ -328,3 +321,41 @@ fetch('./data/videojuegos.json')
 
 // ---------------------------------------------------------------
 
+
+
+const abrirCarrito = () => {
+    modal.classList.add('modalOpen')
+}
+
+const cerrarCarrito = () => {
+    modal.classList.remove('modalOpen')
+}
+
+
+// ------------ SEARCH BAR ------------
+
+
+const juegoBuscado = document.querySelector('#juegoBuscado')
+const formInput = document.querySelector('#searchInput')
+const buttonSearch = document.querySelector('#searchButton')
+
+const searchBar = () => {
+    const busquedaUsuario = formInput.value.toLowerCase()
+    const resultadoBusqueda = videojuegos.filter(
+        (videojuego) => videojuego.nombre.toLowerCase().includes(busquedaUsuario)
+    );
+    
+    if (busquedaUsuario != ''){
+        renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
+    }
+    
+}
+
+// Search button
+buttonSearch.addEventListener('click', searchBar)
+
+// ----------------------------------------------
+
+// Modal
+cartButton.addEventListener('click', abrirCarrito)
+modalClose.addEventListener('click', cerrarCarrito)

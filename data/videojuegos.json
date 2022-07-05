@@ -84,6 +84,25 @@
             "genero": "lucha",
             "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/353/484/products/best1-9e72856dcd3c9204c815863800631331-640-0.jpg",
             "id": 10
+        },
+
+        {
+            "nombre": "Attack On Titan 2",
+            "consola": "PS4",
+            "precio": 800,
+            "genero": "rpg",
+            "imgSrc": "https://d3ugyf2ht6aenh.cloudfront.net/stores/929/242/products/attack_on_titan_2_final_battle-49100311-afae2bd0cb0a78918a15888758482408-480-0.jpg",
+            "id": 11
+        },
+
+        {
+            "nombre": "SEKIRO",
+            "consola": "PS4",
+            "precio": 4000,
+            "genero": "rpg",
+            "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/001/067/161/products/cover-web-preset171-3f39adde22271e1f9116162251534554-640-0.png",
+            "id": 12
         }
+        
     ]
 }

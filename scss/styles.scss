@@ -22,9 +22,29 @@ body{
             color: white;
            }
     }
-    .carritoIcon{
-        margin-left: 16px;
+
+    .cart{
+        display: flex;
+        margin-right: 15px;
+        .cartIcon{
+            margin-left: 16px;
+            border: none;
+            background: violet;
+            .carritoIcon{
+                padding: 5px;
+                &:hover{
+                    color: rgb(95, 21, 95);
+                }
+            }
+        }
+        .totalItemsCarrito{
+            background-color: lightblue;
+            margin-left: 3px;
+            padding: 10px;
+            border-radius: 30px;;
+        }
     }
+     
 }
 
 
@@ -64,7 +84,7 @@ footer {
 
 /* --------------- INDEX DESKTOP --------------- */
 
-/* PRODUCTOS INDEX */
+
 .carousel-inner{
     
     .carousel-item {
@@ -100,6 +120,7 @@ footer {
         display: flex;
         justify-content: center;
         align-items: center;
+        text-align: center;
         width: 20%;
         padding: 25px;
         background-color: transparent;
@@ -121,7 +142,7 @@ footer {
         
         .buttonCTA {
             margin: 10px 0;
-            background-color: rgb(216, 77, 77);
+            background-color: rgb(21, 21, 102);
             color: rgb(247, 247, 247);
             font-size: 20px;
             font-weight: 500;
@@ -131,7 +152,7 @@ footer {
             cursor: pointer;
         }
         .buttonCTA:hover{
-            background-color: rgb(184, 64, 64);
+            background-color: rgb(37, 4, 36);
             box-shadow: 1px 1px 10px lightgrey;
         }
     }
@@ -144,196 +165,186 @@ footer {
 
 
 
-// CARRITO
+/* MODAL */
 
-.cartHeader {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    margin-bottom: 25px;
-    font-size: 30px;
-    img{
-        width: 50px;
-        margin-right: 30px;
-    }
-    .totalItemsCarrito{
-        background-color: lightblue;
-        margin-left: 30px;
-        padding: 10px;
-        border-radius: 30px;;
-    }
-}
+.modal {
+    display: none;
+    background-color: rgb(236, 134, 211);
+    position: fixed;
+    width: 40%;
+    border-radius: 10px;
 
-#cartContainer {
-    margin-bottom: 100px;
-    width: 100%;
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 30px;
-    .cartRow {
-        background-image: linear-gradient(to left, rgb(59, 27, 134), lightblue);
-        border: 1px solid gray;
-        width: 70%;
-        padding: 20px 10px;
+        
+    .modalHeader {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        height: 10%;
+        margin-bottom: 16px;
+    }
+
+    .modalBody {
+        display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
-        .cartImg {
+        
+        /* -------- CARRITO -------- */
+        #cartContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            .cartRow {
+                background-image: linear-gradient(to left, rgb(59, 27, 134), lightblue);
+                border: 1px solid gray;
+                width: 90%;
+                padding: 20px 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                .cartImg {
+                    display: flex;
+                    justify-content: center;
+                    width: 15%;
+                    /* EL CONTENEDOR DE LA IMAGEN OCUPA UN 15% DEL ANCHO DE CART ROW  */
+                    img {
+                        width: 100%;
+                        /* LA IMAGEN OCUPA UN 100% DE CART IMG (QUE OCUPA 15% DE CARTROW) */
+                    }
+                }
+                .cartTitle {
+                    width: 35%;
+                    margin-left: 16px;
+                    text-align: center;
+                }
+                
+                .cartDesc {
+                    width: 25%;
+                    text-align: center;
+                }
+                
+                .cartPrice {
+                    width: 25%;
+                    text-align: center;
+                }
+                
+                .cartCantidad{
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: violet;
+                    margin-right: 30px;
+                    border-radius: 10px;
+                    .restarCantidad{
+                        margin: 10px;
+                        border: none;
+                        &:hover{
+                            background-image: linear-gradient(to bottom, transparent, gray)
+                        }
+                    }
+                    .sumarCantidad{
+                        @extend .restarCantidad
+                    }
+                }
+                .borrarJuego{
+                    padding: 25px;
+                    cursor: pointer;
+                    img{
+                        width: 30px;
+        
+                        &:hover{
+                            background-color: violet;
+                            border-radius: 30px;
+                            
+                        }
+                    } 
+                }
+            }
+        }
+    }
+
+    /* PIE DEL MODAL (SUBTOTAL / BOTON VACIAR / FINALIZAR COMPRA */
+    .modalEnd{
+        .buttonClass{
             display: flex;
             justify-content: center;
-            width: 15%;
-            /* EL CONTENEDOR DE LA IMAGEN OCUPA UN 15% DEL ANCHO DE CART ROW  */
-            img {
-                width: 100%;
-                /* LA IMAGEN OCUPA UN 100% DE CART IMG (QUE OCUPA 15% DE CARTROW) */
+            margin: 25px;
+            gap: 20px;
+            .vaciar{
+                background-color: violet;
+                padding: 15px;
+                &:active{
+                    color: whitesmoke;
+                }
+                &:hover{
+                    background-image: linear-gradient(to bottom, transparent, rgb(70, 34, 70));
+                }
+            }
+            .finalizarCompra {
+                @extend .vaciar;
+            }
+            .verProductos{
+                @extend .vaciar;
             }
         }
-        .cartTitle {
-            width: 35%;
-            margin-left: 16px;
-            text-align: center;
-        }
         
-        .cartDesc {
-            width: 25%;
-            text-align: center;
-        }
-        
-        .cartPrice {
-            width: 25%;
-            text-align: center;
-        }
-        
-        .cartCantidad{
+        .subtotal{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: violet;
-            margin-right: 30px;
-            border-radius: 10px;
-            .restarCantidad{
-                margin: 10px;
-                border: none;
-                &:hover{
-                    background-image: linear-gradient(to bottom, transparent, gray)
-                }
-            }
-            .sumarCantidad{
-                @extend .restarCantidad
-            }
+            margin: 25px;
         }
-
-
-        .borrarJuego{
-            padding: 25px;
-            cursor: pointer;
-            img{
-                width: 30px;
-
-                &:hover{
-                    background-color: violet;
-                    border-radius: 30px;
-                    
-                }
-            } 
-        }
-
-
-        
-        
     }
 }
 
 
 
-/* BOTONES PARA VACIAR, FINALIZAR COMPRA, IR A SECCION PRODUCTOS */
-
-@mixin buttons{
-    background-color: violet;
-    padding: 15px;
-}
-
-@mixin buttonActive{
-    color: whitesmoke;
-}
-
-@mixin buttonHover{
-    background-image: linear-gradient(to bottom, transparent, rgb(70, 34, 70))
-}
-
-.buttonClass{
+.modalOpen {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 16px;
-    gap: 20px;
-    .vaciar{
-        @include buttons;
-        &:active{
-            @include buttonActive;
-        }
-        &:hover{
-            @include buttonHover;
-        }
-    }
-    .finalizarCompra {
-        @include buttons;
-        &:active{
-            @include buttonActive;
-        }
-        &:hover{
-            @include buttonHover;
-        }
-    }
-    .verProductos{
-        @include buttons;
-        &:active{
-            @include buttonActive;
-        }
-        &:hover{
-            @include buttonHover;
-        }
-    }
-    .irArriba{
-        margin-top: 60px;
-        background-color: rgb(4, 4, 41);
-        color: whitesmoke;
-        padding: 15px;
-        &:active{
-            @include buttonActive;
-        }
-        &:hover{
-            @include buttonHover;
-        }
+    justify-content: space-between;
+}
+
+.modalClose {
+    cursor: pointer;
+    background-color: rgb(175, 175, 175);
+    color: white;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 600;
+    &:hover{
+        background-color: black;
+        color: white;
     }
 }
+
+
+
+
+
+
     
-
-
-
-
-/* --------------- INDEX DESKTOP --------------- */
-    
-
-//  .mainProductos{
-//         margin-top: 3.5cm;
-//         width: 100%;
-        
-//     }
-
-
-
 
 /* --------------- MOBILE RESPONSIVE --------------- */
 @media screen and (min-width: 0px) and (max-width: 450px) {
 
-    .cartIcon{
+
+    .search{
+        display: flex;
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    .cart{
         display: flex;
         justify-content: center;
         margin-top: 30px;
         margin-bottom: 30px;
+        
     }
 
     /* INDEX MOBILE */
@@ -355,64 +366,33 @@ footer {
         }
     }
 
-    #cartContainer{
+    .modal{
+        width: 100%;
+        .modalBody{
+            #cartContainer{
+                .cartRow{
+                    display: flex;
+                    justify-content: space-around;
+                    
+                    .cartTitle{
+                        display: none;
+                    }
+                    .cartImg{
+                        width: 30%;
+                    }
+                    
+                    .cartDesc {
+                        display: none;
+                    }
         
-        .cartRow{
-            flex-direction: column;
-            height: 100%;
-            align-items: space-between;
-            justify-content: space-between;
-            
-            .cartTitle{
-                margin: 0 auto;
-            }
-            .cartImg{
-                display: flex;
-                justify-content: center;
-                img{
-                    width: 100px;
+                    .cartCantidad{
+                        margin: auto;
+                    }
+                    
                 }
             }
-            
-            .cartDesc {
-                margin: 40px;
-            }
-
-            .cartCantidad{
-                margin: 0 auto;
-                margin-top: 30px;
-            }
-            
-
         }
     }
-
-
-
-    
-
-    
-
-
-
-    /* PRODUCTOS MOBILE    */
-
-
-
-
-
-
-    /* FAQ MOBILE */
-
-
-
-
-
-
-    /* CONTACTO MOBILE */
-
-
-
 }
 
 
@@ -420,7 +400,7 @@ footer {
 /* ----------------- TABLET RESPONSIVE ----------------- */
 @media screen and (min-width: 451px) and (max-width: 1024px) {
 
-    .cartIcon{
+    .cart{
         display: flex;
         justify-content: center;
         margin-top: 30px;
@@ -440,23 +420,33 @@ footer {
         }
     }
 
-
-    
-    /* PRODUCTOS TABLET    */
-
-
-
-
-
-
-    /* FAQ TABLET */
-
-
-
-
-
-
-    /* CONTACTO TABLET */
+    .modal{
+        width: 75%;
+        .modalBody{
+            #cartContainer{
+                .cartRow{
+                    display: flex;
+                    justify-content: space-around;
+                    
+                    .cartTitle{
+                        display: none;
+                    }
+                    .cartImg{
+                        width: 30%;
+                    }
+                    
+                    .cartDesc {
+                        display: none;
+                    }
+        
+                    .cartCantidad{
+                        margin: auto;
+                    }
+                    
+                }
+            }
+        }
+    }
 
 
 }

@@ -15,8 +15,22 @@ body {
       text-decoration: none;
       margin: 16px 16px 16px 0px;
       color: white; }
-  .navbar .carritoIcon {
-    margin-left: 16px; }
+  .navbar .cart {
+    display: flex;
+    margin-right: 15px; }
+    .navbar .cart .cartIcon {
+      margin-left: 16px;
+      border: none;
+      background: violet; }
+      .navbar .cart .cartIcon .carritoIcon {
+        padding: 5px; }
+        .navbar .cart .cartIcon .carritoIcon:hover {
+          color: #5f155f; }
+    .navbar .cart .totalItemsCarrito {
+      background-color: lightblue;
+      margin-left: 3px;
+      padding: 10px;
+      border-radius: 30px; }
 
 main {
   margin-top: 3.5cm;
@@ -46,7 +60,6 @@ footer {
 
 
 /* --------------- INDEX DESKTOP --------------- */
-/* PRODUCTOS INDEX */
 .carousel-inner .carousel-item img {
   object-fit: cover;
   max-height: 550px;
@@ -70,6 +83,7 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     width: 20%;
     padding: 25px;
     background-color: transparent;
@@ -86,7 +100,7 @@ footer {
       margin-bottom: 10px; }
     #gameCards .card .buttonCTA, #juegoBuscado .card .buttonCTA {
       margin: 10px 0;
-      background-color: #d84d4d;
+      background-color: #151566;
       color: #f7f7f7;
       font-size: 20px;
       font-weight: 500;
@@ -95,121 +109,124 @@ footer {
       border-radius: 10px;
       cursor: pointer; }
     #gameCards .card .buttonCTA:hover, #juegoBuscado .card .buttonCTA:hover {
-      background-color: #b84040;
+      background-color: #250424;
       box-shadow: 1px 1px 10px lightgrey; }
 
-.cartHeader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 50px;
-  margin-bottom: 25px;
-  font-size: 30px; }
-  .cartHeader img {
-    width: 50px;
-    margin-right: 30px; }
-  .cartHeader .totalItemsCarrito {
-    background-color: lightblue;
-    margin-left: 30px;
-    padding: 10px;
-    border-radius: 30px; }
-
-#cartContainer {
-  margin-bottom: 100px;
-  width: 100%;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  gap: 30px; }
-  #cartContainer .cartRow {
-    background-image: linear-gradient(to left, #3b1b86, lightblue);
-    border: 1px solid gray;
-    width: 70%;
-    padding: 20px 10px;
+/* MODAL */
+.modal {
+  display: none;
+  background-color: #ec86d3;
+  position: fixed;
+  width: 40%;
+  border-radius: 10px;
+  /* PIE DEL MODAL (SUBTOTAL / BOTON VACIAR / FINALIZAR COMPRA */ }
+  .modal .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    height: 10%;
+    margin-bottom: 16px; }
+  .modal .modalBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* -------- CARRITO -------- */ }
+    .modal .modalBody #cartContainer {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px; }
+      .modal .modalBody #cartContainer .cartRow {
+        background-image: linear-gradient(to left, #3b1b86, lightblue);
+        border: 1px solid gray;
+        width: 90%;
+        padding: 20px 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center; }
+        .modal .modalBody #cartContainer .cartRow .cartImg {
+          display: flex;
+          justify-content: center;
+          width: 15%;
+          /* EL CONTENEDOR DE LA IMAGEN OCUPA UN 15% DEL ANCHO DE CART ROW  */ }
+          .modal .modalBody #cartContainer .cartRow .cartImg img {
+            width: 100%;
+            /* LA IMAGEN OCUPA UN 100% DE CART IMG (QUE OCUPA 15% DE CARTROW) */ }
+        .modal .modalBody #cartContainer .cartRow .cartTitle {
+          width: 35%;
+          margin-left: 16px;
+          text-align: center; }
+        .modal .modalBody #cartContainer .cartRow .cartDesc {
+          width: 25%;
+          text-align: center; }
+        .modal .modalBody #cartContainer .cartRow .cartPrice {
+          width: 25%;
+          text-align: center; }
+        .modal .modalBody #cartContainer .cartRow .cartCantidad {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: violet;
+          margin-right: 30px;
+          border-radius: 10px; }
+          .modal .modalBody #cartContainer .cartRow .cartCantidad .restarCantidad, .modal .modalBody #cartContainer .cartRow .cartCantidad .sumarCantidad {
+            margin: 10px;
+            border: none; }
+            .modal .modalBody #cartContainer .cartRow .cartCantidad .restarCantidad:hover, .modal .modalBody #cartContainer .cartRow .cartCantidad .sumarCantidad:hover {
+              background-image: linear-gradient(to bottom, transparent, gray); }
+        .modal .modalBody #cartContainer .cartRow .borrarJuego {
+          padding: 25px;
+          cursor: pointer; }
+          .modal .modalBody #cartContainer .cartRow .borrarJuego img {
+            width: 30px; }
+            .modal .modalBody #cartContainer .cartRow .borrarJuego img:hover {
+              background-color: violet;
+              border-radius: 30px; }
+  .modal .modalEnd .buttonClass {
     display: flex;
     justify-content: center;
-    align-items: center; }
-    #cartContainer .cartRow .cartImg {
-      display: flex;
-      justify-content: center;
-      width: 15%;
-      /* EL CONTENEDOR DE LA IMAGEN OCUPA UN 15% DEL ANCHO DE CART ROW  */ }
-      #cartContainer .cartRow .cartImg img {
-        width: 100%;
-        /* LA IMAGEN OCUPA UN 100% DE CART IMG (QUE OCUPA 15% DE CARTROW) */ }
-    #cartContainer .cartRow .cartTitle {
-      width: 35%;
-      margin-left: 16px;
-      text-align: center; }
-    #cartContainer .cartRow .cartDesc {
-      width: 25%;
-      text-align: center; }
-    #cartContainer .cartRow .cartPrice {
-      width: 25%;
-      text-align: center; }
-    #cartContainer .cartRow .cartCantidad {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    margin: 25px;
+    gap: 20px; }
+    .modal .modalEnd .buttonClass .vaciar, .modal .modalEnd .buttonClass .finalizarCompra, .modal .modalEnd .buttonClass .verProductos {
       background-color: violet;
-      margin-right: 30px;
-      border-radius: 10px; }
-      #cartContainer .cartRow .cartCantidad .restarCantidad, #cartContainer .cartRow .cartCantidad .sumarCantidad {
-        margin: 10px;
-        border: none; }
-        #cartContainer .cartRow .cartCantidad .restarCantidad:hover, #cartContainer .cartRow .cartCantidad .sumarCantidad:hover {
-          background-image: linear-gradient(to bottom, transparent, gray); }
-    #cartContainer .cartRow .borrarJuego {
-      padding: 25px;
-      cursor: pointer; }
-      #cartContainer .cartRow .borrarJuego img {
-        width: 30px; }
-        #cartContainer .cartRow .borrarJuego img:hover {
-          background-color: violet;
-          border-radius: 30px; }
+      padding: 15px; }
+      .modal .modalEnd .buttonClass .vaciar:active, .modal .modalEnd .buttonClass .finalizarCompra:active, .modal .modalEnd .buttonClass .verProductos:active {
+        color: whitesmoke; }
+      .modal .modalEnd .buttonClass .vaciar:hover, .modal .modalEnd .buttonClass .finalizarCompra:hover, .modal .modalEnd .buttonClass .verProductos:hover {
+        background-image: linear-gradient(to bottom, transparent, #462246); }
+  .modal .modalEnd .subtotal {
+    display: flex;
+    margin: 25px; }
 
-/* BOTONES PARA VACIAR, FINALIZAR COMPRA, IR A SECCION PRODUCTOS */
-.buttonClass {
+.modalOpen {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: 16px;
-  gap: 20px; }
-  .buttonClass .vaciar {
-    background-color: violet;
-    padding: 15px; }
-    .buttonClass .vaciar:active {
-      color: whitesmoke; }
-    .buttonClass .vaciar:hover {
-      background-image: linear-gradient(to bottom, transparent, #462246); }
-  .buttonClass .finalizarCompra {
-    background-color: violet;
-    padding: 15px; }
-    .buttonClass .finalizarCompra:active {
-      color: whitesmoke; }
-    .buttonClass .finalizarCompra:hover {
-      background-image: linear-gradient(to bottom, transparent, #462246); }
-  .buttonClass .verProductos {
-    background-color: violet;
-    padding: 15px; }
-    .buttonClass .verProductos:active {
-      color: whitesmoke; }
-    .buttonClass .verProductos:hover {
-      background-image: linear-gradient(to bottom, transparent, #462246); }
-  .buttonClass .irArriba {
-    margin-top: 60px;
-    background-color: #040429;
-    color: whitesmoke;
-    padding: 15px; }
-    .buttonClass .irArriba:active {
-      color: whitesmoke; }
-    .buttonClass .irArriba:hover {
-      background-image: linear-gradient(to bottom, transparent, #462246); }
+  justify-content: space-between; }
 
-/* --------------- INDEX DESKTOP --------------- */
+.modalClose {
+  cursor: pointer;
+  background-color: #afafaf;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  font-size: large;
+  font-weight: 600; }
+  .modalClose:hover {
+    background-color: black;
+    color: white; }
+
 /* --------------- MOBILE RESPONSIVE --------------- */
 @media screen and (min-width: 0px) and (max-width: 450px) {
-  .cartIcon {
+  .search {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px; }
+  .cart {
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -224,30 +241,23 @@ footer {
     align-items: center; }
     #gameCards .card, #juegoBuscado .card {
       width: 70%; }
-  #cartContainer .cartRow {
-    flex-direction: column;
-    height: 100%;
-    align-items: space-between;
-    justify-content: space-between; }
-    #cartContainer .cartRow .cartTitle {
-      margin: 0 auto; }
-    #cartContainer .cartRow .cartImg {
+  .modal {
+    width: 100%; }
+    .modal .modalBody #cartContainer .cartRow {
       display: flex;
-      justify-content: center; }
-      #cartContainer .cartRow .cartImg img {
-        width: 100px; }
-    #cartContainer .cartRow .cartDesc {
-      margin: 40px; }
-    #cartContainer .cartRow .cartCantidad {
-      margin: 0 auto;
-      margin-top: 30px; }
-  /* PRODUCTOS MOBILE    */
-  /* FAQ MOBILE */
-  /* CONTACTO MOBILE */ }
+      justify-content: space-around; }
+      .modal .modalBody #cartContainer .cartRow .cartTitle {
+        display: none; }
+      .modal .modalBody #cartContainer .cartRow .cartImg {
+        width: 30%; }
+      .modal .modalBody #cartContainer .cartRow .cartDesc {
+        display: none; }
+      .modal .modalBody #cartContainer .cartRow .cartCantidad {
+        margin: auto; } }
 
 /* ----------------- TABLET RESPONSIVE ----------------- */
 @media screen and (min-width: 451px) and (max-width: 1024px) {
-  .cartIcon {
+  .cart {
     display: flex;
     justify-content: center;
     margin-top: 30px;
@@ -258,6 +268,16 @@ footer {
     height: 300px; }
   #gameCards .card, #juegoBuscado .card {
     width: 40%; }
-  /* PRODUCTOS TABLET    */
-  /* FAQ TABLET */
-  /* CONTACTO TABLET */ }
+  .modal {
+    width: 75%; }
+    .modal .modalBody #cartContainer .cartRow {
+      display: flex;
+      justify-content: space-around; }
+      .modal .modalBody #cartContainer .cartRow .cartTitle {
+        display: none; }
+      .modal .modalBody #cartContainer .cartRow .cartImg {
+        width: 30%; }
+      .modal .modalBody #cartContainer .cartRow .cartDesc {
+        display: none; }
+      .modal .modalBody #cartContainer .cartRow .cartCantidad {
+        margin: auto; } }

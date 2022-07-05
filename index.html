@@ -49,13 +49,13 @@
                     <a class="nav-link active" aria-current="page" href="#">INICIO</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/productos.html">PRODUCTOS</a>
+                    <a class="nav-link" href="#">PRODUCTOS</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/faq.html">FAQ</a>
+                    <a class="nav-link" href="#">FAQ</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/contacto.html">CONTACTO</a>
+                    <a class="nav-link" href="#">CONTACTO</a>
                   </li>
                 </ul>
 
@@ -64,7 +64,7 @@
                   <li><a href="#">INICIAR SESIÓN</a></li>
                 </div>
 
-                <div class="d-flex">
+                <div class="search">
 
                   <div id="searchBar" class="d-flex">
                     <input id="searchInput" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -73,13 +73,15 @@
 
                 </div>
 
-                <div class="cartIcon">
-                  <a href="#cartContainer">
-                    <svg class="carritoIcon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="40px" height="40px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 26 26"><path fill="currentColor" d="M15 3c-1.093 0-2 .907-2 2v1H8a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-5V5c0-1.093-.907-2-2-2h-3zM.812 4A1.001 1.001 0 0 0 1 6h1c.505 0 .66.108.781.25c.122.142.219.413.219.75v11c0 1.124.248 2.182.969 2.938C4.689 21.692 5.769 22 7 22h18a1 1 0 1 0 0-2H7c-.905 0-1.318-.212-1.563-.469C5.194 19.275 5 18.83 5 18V7c0-.69-.173-1.43-.688-2.031C3.798 4.368 2.95 4 2 4H1a1 1 0 0 0-.094 0a1.001 1.001 0 0 0-.094 0zM23 22a2 2 0 1 0 0 4a2 2 0 0 0 0-4zM7 22a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm8-17h3v1h-3V5z"/></svg>
-                  </a>
+                <div class="cart">
+                  <button id="cartButton" class="cartIcon">
+                      <svg class="carritoIcon" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="40px" height="40px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 26 26"><path fill="currentColor" d="M15 3c-1.093 0-2 .907-2 2v1H8a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h17a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1h-5V5c0-1.093-.907-2-2-2h-3zM.812 4A1.001 1.001 0 0 0 1 6h1c.505 0 .66.108.781.25c.122.142.219.413.219.75v11c0 1.124.248 2.182.969 2.938C4.689 21.692 5.769 22 7 22h18a1 1 0 1 0 0-2H7c-.905 0-1.318-.212-1.563-.469C5.194 19.275 5 18.83 5 18V7c0-.69-.173-1.43-.688-2.031C3.798 4.368 2.95 4 2 4H1a1 1 0 0 0-.094 0a1.001 1.001 0 0 0-.094 0zM23 22a2 2 0 1 0 0 4a2 2 0 0 0 0-4zM7 22a2 2 0 1 0 0 4a2 2 0 0 0 0-4zm8-17h3v1h-3V5z"/></svg>
+                  </button>
+                  <div class="totalItemsCarrito">
+                    0
+                  </div>
                 </div>
-
-              </div>
+              
             </div>
           </nav>
     </header>
@@ -127,36 +129,37 @@
           <!-- Codigo inyectado desde JS -->
         </section>
 
-        <div class="cartHeader">
-          <img src="https://cdn-icons-png.flaticon.com/512/3301/3301039.png" alt="">
-          <span> Carrito </span>
-          <div class="totalItemsCarrito">
-            0
+      
+        <div class="modal animate__animated animate__fadeInLeft">
+
+          <div class="modalHeader">
+            <b> CARRITO </b>
+            <button class="modalClose"> X </button>
           </div>
-        </div>
-
-        <div id="cartContainer">
+          <div class="modalBody">
+            <div id="cartContainer">
               <!-- Codigo inyectado desde JS -->
-              
-        </div>
+            </div>
+             
+          </div>
 
-        <div class="subtotal"></div>
-        
+          <div class="modalEnd">
+            <div class="subtotal">
+              <b> SUBTOTAL: $0 </b>
+              <!-- Codigo inyectado desde JS -->
+            </div>
+  
+            <div class="buttonClass">
+              <button id="vaciarCarrito" class="vaciar"> 
+                <b> VACIAR CARRITO </b>
+              </button>
+              <button class="finalizarCompra">
+                <b> FINALIZAR COMPRA </b>
+              </button>
+            </div> 
+          </div>
 
-        <div class="buttonClass">
-          <button id="vaciarCarrito" class="vaciar"> 
-            <b> VACIAR CARRITO </b>
-          </button>
-          <button class="finalizarCompra">
-            <b> FINALIZAR COMPRA </b>
-          </button>
-          <a href="pages/productos.html">
-            <button class="verProductos">
-              <b> VER TODOS LOS PRODUCTOS </b> 
-            </button>
-          </a>
         </div>
-     
 
     </main>
 
