@@ -77,13 +77,22 @@ const renderizarCarrito = () => {
 
      totalItemsInCart.innerHTML = carrito.length
 
+
      let subtotalCarrito = 0
      carrito.forEach((videojuego) => {
         subtotalCarrito+= videojuego.precio * videojuego.cantidad
-        subtotal.innerHTML = ` <b> SUBTOTAL: $${subtotalCarrito} </b>` 
+
+     if (subtotalCarrito > 8000){
+         subtotalNuevo = subtotalCarrito - 500
+         subtotal.innerHTML = `  <b> SUBTOTAL: <del> $${subtotalCarrito} </del> </b> &nbsp;&nbsp <b> $${subtotalNuevo} </b> `
+     } else {
+         subtotal.innerHTML = ` <b> SUBTOTAL: $${subtotalCarrito} </b> `
+     }
+    
     })
      
 }
+
 
 const sumarCantidad = (id) => {
     const juegoAModificar = carrito.find((juego) => juego.id === id)
@@ -178,6 +187,7 @@ const eliminarJuegoDelCarrito = (e) => {
       }).showToast();
 
     renderizarCarrito()
+    
 }
 
 

@@ -126,7 +126,20 @@ footer {
     align-items: center;
     padding: 15px;
     height: 10%;
-    margin-bottom: 16px; }
+    margin-bottom: 16px;
+    font-size: 20px; }
+    .modal .modalHeader .modalClose {
+      cursor: pointer;
+      background-color: #141141;
+      color: white;
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 20px;
+      font-weight: 600; }
+      .modal .modalHeader .modalClose:hover {
+        background-color: black;
+        color: white; }
   .modal .modalBody {
     display: flex;
     flex-direction: column;
@@ -185,40 +198,29 @@ footer {
             .modal .modalBody #cartContainer .cartRow .borrarJuego img:hover {
               background-color: violet;
               border-radius: 30px; }
-  .modal .modalEnd .buttonClass {
-    display: flex;
-    justify-content: center;
-    margin: 25px;
-    gap: 20px; }
-    .modal .modalEnd .buttonClass .vaciar, .modal .modalEnd .buttonClass .finalizarCompra, .modal .modalEnd .buttonClass .verProductos {
-      background-color: violet;
-      padding: 15px; }
-      .modal .modalEnd .buttonClass .vaciar:active, .modal .modalEnd .buttonClass .finalizarCompra:active, .modal .modalEnd .buttonClass .verProductos:active {
-        color: whitesmoke; }
-      .modal .modalEnd .buttonClass .vaciar:hover, .modal .modalEnd .buttonClass .finalizarCompra:hover, .modal .modalEnd .buttonClass .verProductos:hover {
-        background-image: linear-gradient(to bottom, transparent, #462246); }
-  .modal .modalEnd .subtotal {
-    display: flex;
-    margin: 25px; }
+  .modal .modalEnd {
+    background-image: linear-gradient(to bottom, transparent, #141141); }
+    .modal .modalEnd .buttonClass {
+      display: flex;
+      justify-content: center;
+      margin: 25px;
+      gap: 20px; }
+      .modal .modalEnd .buttonClass .vaciar, .modal .modalEnd .buttonClass .finalizarCompra, .modal .modalEnd .buttonClass .verProductos {
+        background-color: violet;
+        padding: 15px; }
+        .modal .modalEnd .buttonClass .vaciar:active, .modal .modalEnd .buttonClass .finalizarCompra:active, .modal .modalEnd .buttonClass .verProductos:active {
+          color: whitesmoke; }
+        .modal .modalEnd .buttonClass .vaciar:hover, .modal .modalEnd .buttonClass .finalizarCompra:hover, .modal .modalEnd .buttonClass .verProductos:hover {
+          background-image: linear-gradient(to bottom, transparent, #462246); }
+    .modal .modalEnd .subtotal {
+      display: flex;
+      margin: 25px;
+      font-size: 20px; }
 
 .modalOpen {
   display: flex;
   flex-direction: column;
   justify-content: space-between; }
-
-.modalClose {
-  cursor: pointer;
-  background-color: #afafaf;
-  color: white;
-  border: none;
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  font-size: large;
-  font-weight: 600; }
-  .modalClose:hover {
-    background-color: black;
-    color: white; }
 
 /* --------------- MOBILE RESPONSIVE --------------- */
 @media screen and (min-width: 0px) and (max-width: 450px) {
