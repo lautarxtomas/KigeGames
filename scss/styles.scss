@@ -103,11 +103,42 @@ footer {
         }
 }
 
+.filter{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 30px;
+    padding: 10px;
+    width: 100%;
+    background-image: linear-gradient(to right, transparent, violet);
+    ul{
+        display: flex;
+        gap: 20px;
+        list-style: none;
+        margin-top: 12px;
+        li{
+            display: flex;
+            align-items: center;
+            a{
+                color: whitesmoke;
+                text-decoration: none;
+            }
+            .filter-eliminar{
+                color: red;
+            }
+        }
+    }
+}
+
+.marcar{
+    color: black;
+}
+
 
 .title{
     display: flex;
     justify-content: center;
-    margin-top: 1.5cm;
+    margin-top: 1cm;
 }
 
 
@@ -172,9 +203,7 @@ footer {
     background-color: rgb(236, 134, 211);
     position: fixed;
     width: 40%;
-    border-radius: 10px;
-
-        
+      
     .modalHeader {
         display: flex;
         justify-content: space-between;
@@ -201,11 +230,6 @@ footer {
     }
 
     .modalBody {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        
         /* -------- CARRITO -------- */
         #cartContainer {
             width: 100%;
@@ -355,6 +379,28 @@ footer {
     .carousel-item img{
         height: 170px;
     }
+
+    .filter{
+        justify-content: center;
+        background-image: linear-gradient(to left, transparent, violet);
+        ul{
+            flex-direction: column;
+            gap: 20px;
+            list-style: none;
+            margin-top: 12px;
+            li{
+                
+                a{
+                    color: whitesmoke;
+                    text-decoration: none;
+                }
+                .filter-eliminar{
+                    color: red;
+                }
+            }
+        }
+    }
+    
 
     #gameCards {
         flex-direction: column;

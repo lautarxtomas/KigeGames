@@ -18,7 +18,9 @@ const subtotal = document.querySelector(".subtotal")
 
 
 let videojuegos = []
-let videojuegosProductos = []
+
+// LIMPIAR LOS PRODUCTOS
+const cleanProducts = (container) => container.innerHTML = " ";
 
 
 // JUEGOS DEL INDEX
@@ -39,6 +41,36 @@ renderizarListaJuegos = (array, container) => {
     })
     listenerBotonCarrito()
 }
+
+// RENDERIZAR LOS PRODUCTOS FILTRADOS
+const filterProducts = (genero) => {
+    cleanProducts(gameCards);
+    videojuegos.forEach((juego) => {
+      if (genero === juego.genero) {
+        const card = document.createElement('div')
+        card.className = 'card'
+        card.innerHTML = `
+                <h3 class="cardTitle"> ${juego.nombre} </h3>
+                <img src="${juego.imgSrc}" class="cardImg">
+                <p class="cardDesc"> ${juego.consola} </p>
+                <span class="cardPrice"> $${juego.precio} </span>
+                <button data-id="${juego.id}" class="buttonCTA"> Agregar al Carrito </button>
+            `
+        gameCards.append(card)
+      }
+    })
+    listenerBotonCarrito()
+  };
+
+
+// FILTER BUTTON
+// let filterButtons = document.querySelectorAll('.filter-button');
+
+// filterButtons.forEach((button) => {
+//     button.addEventListener("click", button.classList.add(".marcar"))
+//     })
+  
+
 
 // CARRITO
 
@@ -177,13 +209,13 @@ const eliminarJuegoDelCarrito = (e) => {
         destination: "https://github.com/apvarun/toastify-js",
         newWindow: true,
         close: true,
-        gravity: "bottom", // `top` or `bottom`
-        position: "left", // `left`, `center` or `right`
-        stopOnFocus: true, // Prevents dismissing of toast on hover
+        gravity: "bottom", 
+        position: "left", 
+        stopOnFocus: true,
         style: {
           background: "linear-gradient(to right, red, rgb(70, 34, 70))",
         },
-        onClick: function(){} // Callback after click
+        onClick: function(){}
       }).showToast();
 
     renderizarCarrito()
@@ -283,19 +315,10 @@ const totalCarrito = () => {
         )
     }
     
-    // LO DE ARRIBA ES IGUAL QUE ESTO
-
-    // if (montoTotal >= 8000){
-    //         descuento (montoTotal, 500)
-    // } else {
-    //     alert('Su precio a pagar es de $' + montoTotal)
-    // }
-
-    // Swal.fire('MUCHAS GRACIAS POR SU COMPRA!')
-
     vaciarCarrito()
     subtotal.innerHTML = ' <b> SUBTOTAL: $0 </b>'
 }
+
 
 
 // BOTON PARA FINALIZAR COMPRA (CALCULAR TOTAL CARRITO)
@@ -357,6 +380,8 @@ const searchBar = () => {
     
     if (busquedaUsuario != ''){
         renderizarListaJuegos(resultadoBusqueda, juegoBuscado)
+    } else{
+        cleanProducts(juegoBuscado);
     }
     
 }
@@ -369,3 +394,4 @@ buttonSearch.addEventListener('click', searchBar)
 // Modal
 cartButton.addEventListener('click', abrirCarrito)
 modalClose.addEventListener('click', cerrarCarrito)
+
