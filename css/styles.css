@@ -53,7 +53,7 @@ footer {
     footer .flex-icons svg {
       color: violet; }
     footer .flex-icons svg:hover {
-      color: #98b1b3; }
+      color: #bb4fd6; }
 
 /* ----------------------------------------------------------- *\
 
@@ -141,7 +141,6 @@ footer {
 .modal {
   display: none;
   background-color: #ec86d3;
-  position: fixed;
   width: 40%;
   /* PIE DEL MODAL (SUBTOTAL / BOTON VACIAR / FINALIZAR COMPRA */ }
   .modal .modalHeader {

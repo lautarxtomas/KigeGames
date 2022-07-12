@@ -64,12 +64,17 @@ const filterProducts = (genero) => {
 
 
 // FILTER BUTTON
-// let filterButtons = document.querySelectorAll('.filter-button');
 
-// filterButtons.forEach((button) => {
-//     button.addEventListener("click", button.classList.add(".marcar"))
-//     })
-  
+const cambiarColorBoton = (e) => {
+    e.target.filterbuttons.classList.add(".marcar")
+}
+
+let filterbuttons = document.querySelectorAll('.filter-button')
+
+filterbuttons.forEach((filterbutton) => {
+    filterbutton.addEventListener('click', cambiarColorBoton)
+})
+
 
 
 // CARRITO
@@ -109,20 +114,29 @@ const renderizarCarrito = () => {
 
      totalItemsInCart.innerHTML = carrito.length
 
+     calcularSubtotalCarrito()
 
-     let subtotalCarrito = 0
-     carrito.forEach((videojuego) => {
-        subtotalCarrito+= videojuego.precio * videojuego.cantidad
+}
 
-     if (subtotalCarrito > 8000){
-         subtotalNuevo = subtotalCarrito - 500
-         subtotal.innerHTML = `  <b> SUBTOTAL: <del> $${subtotalCarrito} </del> </b> &nbsp;&nbsp <b> $${subtotalNuevo} </b> `
-     } else {
-         subtotal.innerHTML = ` <b> SUBTOTAL: $${subtotalCarrito} </b> `
-     }
-    
-    })
-     
+const calcularSubtotalCarrito = () => { // LLAMAR A ESTA FUNCION CADA VEZ QUE HAGA ALGUN CAMBIO EN MI CARRITO
+    let subtotalCarrito = 0
+
+    if (carrito.length > 0) { // SOLAMENTE ENTRA EN EL FOREACH SI HAY ALGO EN EL CARRITO (SINO, AL ELIMINAR EL ULTIMO JUEGO SEGUIRIA APARECIENDO EL PRECIO DEL MISMO EN EL SUBTOTAL PORQUE NUNCA ENTRO EN EL FOREACH)
+        carrito.forEach((videojuego) => {
+            subtotalCarrito+= videojuego.precio * videojuego.cantidad
+
+        if (subtotalCarrito > 8000){
+            subtotalNuevo = subtotalCarrito - 500
+            subtotal.innerHTML = `  <b> SUBTOTAL: <del> $${subtotalCarrito} </del> </b> &nbsp;&nbsp <b> $${subtotalNuevo} </b> `
+        } else {
+            subtotal.innerHTML = ` <b> SUBTOTAL: $${subtotalCarrito} </b> `
+        }
+        
+        })
+    } else{
+        subtotal.innerHTML = ` <b> SUBTOTAL: $0 </b> `
+        vaciarCarrito() // PONGO ESTO PARA QUE NO ME DEJE APRETAR EL BOTON DE VACIAR CARRITO O FINALIZAR COMPRA EN CASO DE QUE EL SUBTOTAL LLEGUE A 0
+    }
 }
 
 
@@ -131,6 +145,7 @@ const sumarCantidad = (id) => {
     juegoAModificar.cantidad++
     localStorage.setItem("carrito", JSON.stringify(carrito)) // CADA VEZ QUE HACEMOS ALGUNA MODIFICACION EN EL CARRITO, HAY QUE SETEARLO EN EL LOCAL STORAGE, PONER EL STRINGIFY DEL CARRITO, Y VOLVER A RENDERIZAR
     renderizarCarrito()
+    calcularSubtotalCarrito()
 }
 
 const restarCantidad = (id) => {
@@ -147,6 +162,7 @@ const restarCantidad = (id) => {
         localStorage.setItem("carrito", JSON.stringify(carrito))
         renderizarCarrito()
     }
+    calcularSubtotalCarrito()
 }
 
 
@@ -187,6 +203,7 @@ const agregarJuegoAlCarrito = (e) => {
     
     renderizarCarrito()
     localStorage.setItem('carrito', JSON.stringify(carrito)) 
+    calcularSubtotalCarrito()
 }
 
 // BOTON PARA AGREGAR JUEGO AL CARRITO
@@ -219,6 +236,7 @@ const eliminarJuegoDelCarrito = (e) => {
       }).showToast();
 
     renderizarCarrito()
+    calcularSubtotalCarrito()
     
 }
 
@@ -278,7 +296,7 @@ const vaciarCarrito = () => {
     carrito = [] // Si no vaciamos también el array del carrito, se borrarían los productos del Local Storage pero no del array en sí, por lo que los productos seguirían impresos en pantalla (hasta que recarguemos la página)
     renderizarCarrito()
     totalItemsInCart.innerHTML = carrito.length
-    subtotal.innerHTML = '<b> SUBTOTAL: $0 </b>'
+    calcularSubtotalCarrito()
 }
 
 // ------------------------------------------------------
@@ -316,7 +334,7 @@ const totalCarrito = () => {
     }
     
     vaciarCarrito()
-    subtotal.innerHTML = ' <b> SUBTOTAL: $0 </b>'
+    calcularSubtotalCarrito()
 }
 
 
