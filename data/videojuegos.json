@@ -102,7 +102,45 @@
             "genero": "rpg",
             "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/001/067/161/products/cover-web-preset171-3f39adde22271e1f9116162251534554-640-0.png",
             "id": 12
+        },
+
+        {
+            "nombre": "The Evil Within 2",
+            "consola": "PS4",
+            "precio": 2000,
+            "genero": "terror",
+            "imgSrc": "https://d3ugyf2ht6aenh.cloudfront.net/stores/361/025/products/tew-2-ps41-22ea2240e0071dcce515124462607213-480-0.jpg",
+            "id": 13
+        },
+
+        {
+            "nombre": "Resident Evil 7",
+            "consola": "PS4",
+            "precio": 3000,
+            "genero": "terror",
+            "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/361/025/products/re-7-ps41-47daece8a8afcb24d615124455098843-640-0.jpg",
+            "id": 14
+        },
+
+        {
+            "nombre": "Death Stranding",
+            "consola": "PS4",
+            "precio": 7000,
+            "genero": "accion",
+            "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/001/067/161/products/death-stranding-cover-web1-2ab7fe02071f3eb39715778299815786-640-0.png",
+            "id": 15
+        },
+
+        {
+            "nombre": "NBA 2K22",
+            "consola": "PS5",
+            "precio": 9000,
+            "genero": "deportes",
+            "imgSrc": "http://d3ugyf2ht6aenh.cloudfront.net/stores/910/199/products/nba-2k22-ps51-be3f99ace83a51e82216359768873245-640-0.jpg",
+            "id": 16
         }
+
+
         
     ]
 }
