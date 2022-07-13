@@ -97,6 +97,9 @@ footer {
       .filter ul li .filter-eliminar {
         color: red; }
 
+.marcar {
+  color: black; }
+
 .title {
   display: flex;
   justify-content: center;

@@ -63,6 +63,24 @@ const filterProducts = (genero) => {
   };
 
 
+// FUNCION PARA CAMBIAR EL COLOR DEL FILTERBUTTON CUANDO LO SELECCIONAMOS
+  const cambiarColorBoton = (e) => {
+    let oldActive = document.querySelectorAll(".marcar")
+    
+    for (let i = 0; i < oldActive.length; i++) {  // CADA VEZ QUE ENTRA EN LA FUNCION, BUSCA EL BOTON YA MARCADO PARA DESMARCARLO
+        oldActive[i].classList.remove("marcar")
+    }
+
+    e.target.classList.add("marcar") // RECIEN LO MARCA ACÁ
+  }
+
+  let filterbuttons = document.querySelectorAll('.filter-button')
+
+  filterbuttons.forEach((filterbutton) => {
+    filterbutton.addEventListener('click', cambiarColorBoton)
+  })
+
+
 
 // CARRITO
 
