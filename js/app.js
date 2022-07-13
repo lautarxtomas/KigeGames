@@ -81,6 +81,15 @@ const filterProducts = (genero) => {
   })
 
 
+  //ELIMINAR FILTROS
+  const eliminarFiltrados = (e) => {
+    renderizarListaJuegos(videojuegos, gameCards)
+  }
+
+  let eliminarFiltro = document.querySelector('.filter-eliminar')
+  eliminarFiltro.addEventListener('click', eliminarFiltrados)
+
+
 
 // CARRITO
 
