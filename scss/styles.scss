@@ -111,6 +111,9 @@ footer {
     padding: 10px;
     width: 100%;
     background-image: linear-gradient(to right, transparent, violet);
+    .marcar{
+        color: black;
+    }
     ul{
         display: flex;
         gap: 20px;
@@ -122,6 +125,12 @@ footer {
             a{
                 color: whitesmoke;
                 text-decoration: none;
+                  &:active{
+                      color: black;
+                  }
+                  &:hover{
+                      color: rgb(43, 1, 97);
+                  }
             }
             .filter-eliminar{
                 color: red;
@@ -130,9 +139,9 @@ footer {
     }
 }
 
-.marcar{
-    color: black;
-}
+// .marcar{
+//     color: black;
+// }
 
 
 .title{

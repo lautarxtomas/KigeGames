@@ -63,19 +63,6 @@ const filterProducts = (genero) => {
   };
 
 
-// FILTER BUTTON
-
-const cambiarColorBoton = (e) => {
-    e.target.filterbuttons.classList.add(".marcar")
-}
-
-let filterbuttons = document.querySelectorAll('.filter-button')
-
-filterbuttons.forEach((filterbutton) => {
-    filterbutton.addEventListener('click', cambiarColorBoton)
-})
-
-
 
 // CARRITO
 
@@ -188,13 +175,13 @@ const agregarJuegoAlCarrito = (e) => {
             destination: "https://github.com/apvarun/toastify-js",
             newWindow: true,
             close: true,
-            gravity: "bottom", // `top` or `bottom`
-            position: "left", // `left`, `center` or `right`
-            stopOnFocus: true, // Prevents dismissing of toast on hover
+            gravity: "bottom", 
+            position: "right",
+            stopOnFocus: true,
             style: {
               background: "linear-gradient(to right, violet, rgb(70, 34, 70))",
             },
-            onClick: function(){} // Callback after click
+            onClick: function(){}
           }).showToast();
           
     } else {
@@ -227,7 +214,7 @@ const eliminarJuegoDelCarrito = (e) => {
         newWindow: true,
         close: true,
         gravity: "bottom", 
-        position: "left", 
+        position: "right", 
         stopOnFocus: true,
         style: {
           background: "linear-gradient(to right, red, rgb(70, 34, 70))",
@@ -357,18 +344,6 @@ fetch('./data/videojuegos.json')
 })
 
 
-// ASYNC - AWAIT --> SE PUEDE HACER ESTO EN VEZ DEL FETCH
-
-// const cargarListaJuegos = async () => {
-//     const res = await fetch('../data/videojuegos.json')
-//     const { data } = await res.json()
-//     videojuegos = data
-//     renderizarListaJuegos(videojuegos, gameCards)
-// }
-
-// LLAMADOS
-
-// cargarListaJuegos()
 
 // ---------------------------------------------------------------
 
